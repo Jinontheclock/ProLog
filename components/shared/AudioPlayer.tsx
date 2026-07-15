@@ -31,7 +31,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({
     <View style={styles.card}>
       <View style={styles.row}>
         {/* Play/Pause/Loading Icon */}
-        <TouchableOpacity onPress={onPlayPause} style={styles.iconButton} disabled={isLoading}>
+        <TouchableOpacity onPress={onPlayPause} style={styles.iconButton} disabled={isLoading} accessibilityRole="button" accessibilityLabel={isPlaying ? "Pause audio" : "Play audio"}>
           {isLoading ? (
             <MaterialIcon
               name="cached"
@@ -62,7 +62,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({
           />
         </TouchableOpacity> */}
         {/* Restart Icon */}
-        <TouchableOpacity onPress={onRestart} style={styles.iconButton}>
+        <TouchableOpacity onPress={onRestart} style={styles.iconButton} accessibilityRole="button" accessibilityLabel="Restart audio">
           <MaterialIcon 
             name="restart" 
             size={20} 

@@ -40,29 +40,24 @@ const ProgressCard: React.FC<ProgressCardProps> = ({
 
   // Function to resolve image sources from string paths
   const getImageSource = (imagePath: string) => {
-    console.log('Loading image path:', imagePath); // Debug log
     switch (imagePath) {
       case "@/assets/images/In-progress_Icon.png":
         return require("@/assets/images/In-progress_Icon.png");
       case "@/assets/images/check.png":
         return require("@/assets/images/check.png");
       default:
-        console.log('Using default image for path:', imagePath);
         return require("@/assets/images/In-progress_Icon.png");
     }
   };
 
   // Function to resolve color values from string references
   const getColorValue = (colorString: string) => {
-    console.log('Resolving color string:', colorString); // Debug log
     switch (colorString) {
       case "Colors.white":
         return Colors.white;
       case "Colors.grey[300]":
-        console.log('Using grey[300]:', Colors.grey[300]); // Debug log
         return Colors.grey[300];
       default:
-        console.log('Using default white color for:', colorString);
         return Colors.white;
     }
   };

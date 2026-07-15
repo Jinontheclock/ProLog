@@ -10,6 +10,7 @@ interface IconButtonProps {
   iconBlack?: any;
   iconComponent?: ReactNode;
   onPress?: () => void;
+  accessibilityLabel?: string;
   variant?: IconButtonVariant;
   size?: number;
   disabled?: boolean;
@@ -38,6 +39,7 @@ export const IconButton: React.FC<IconButtonProps> = ({
   variant = 'primary',
   size = 40,
   disabled = false,
+  accessibilityLabel,
 }) => {
   const { backgroundColor, iconColor } = variantStyles[variant];
   const iconSource = variant === 'light' && iconBlack ? iconBlack : icon;
@@ -55,6 +57,8 @@ export const IconButton: React.FC<IconButtonProps> = ({
       ]}
       onPress={onPress}
       disabled={disabled}
+      accessibilityRole="button"
+      accessibilityLabel={accessibilityLabel}
     >
       {iconComponent ? (
         iconComponent

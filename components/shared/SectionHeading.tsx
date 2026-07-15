@@ -1,8 +1,9 @@
 import MaterialIcon from '@/components/shared/MaterialIcon';
+import { UpdatePulse } from '@/components/shared/UpdatePulse';
 import { Colors } from '@/constants/colors';
 import { Typography } from '@/constants/typography';
 import React, { useEffect, useRef } from 'react';
-import { Animated, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Animated, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 interface SectionHeadingProps {
   level: string;
@@ -101,10 +102,14 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
       <View style={styles.headerRow}>
         <Text style={styles.level}>{level}</Text>
         {icon_action && (
-          <TouchableOpacity 
-            style={styles.searchButton} 
+          <View style={styles.updateButtonWrap}>
+          {onIconPress && <UpdatePulse size={48} />}
+          <TouchableOpacity
+            style={styles.searchButton}
             onPress={onIconPress}
             disabled={isLoading}
+            accessibilityRole="button"
+            accessibilityLabel="Sync data"
           >
             <Animated.View
               style={{
@@ -116,13 +121,14 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
                 }],
               }}
             >
-              <MaterialIcon 
-                name={icon_action} 
-                size={24} 
-                color={isLoading ? Colors.grey[400] : Colors.black} 
+              <MaterialIcon
+                name={icon_action}
+                size={24}
+                color={isLoading ? Colors.grey[400] : Colors.black}
               />
             </Animated.View>
           </TouchableOpacity>
+          </View>
         )}
       </View>
       <Text style={styles.title}>{title}</Text>
@@ -193,7 +199,9 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 0,
     borderBottomLeftRadius: 40,
     borderBottomRightRadius: 40,
-    paddingTop: 56,
+    // 56 reserves the phone status-bar area on native; the web demo has no
+    // status bar, so that space reads as an oversized top margin — trim it.
+    paddingTop: Platform.OS === 'web' ? 24 : 56,
     paddingBottom: 20,
     paddingHorizontal: 40,
     shadowColor: Colors.black,
@@ -208,10 +216,18 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 0,
+    // keep the update button above the title/progress siblings that paint
+    // later — without this the icon isn't hit-testable on web
+    zIndex: 10,
   },
   level: {
     ...Typography.contentSubtitle,
     color: Colors.black,
+  },
+  updateButtonWrap: {
+    width: 48,
+    height: 48,
+    position: 'relative',
   },
   searchButton: {
     width: 48,

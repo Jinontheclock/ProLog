@@ -24,7 +24,7 @@ export default function DocumentScannerScreen() {
           
           {/* Header */}
           <View style={[styles.header, { paddingTop: insets.top + 47 }]}>
-            <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
+            <TouchableOpacity style={styles.backButton} onPress={() => router.back()} accessibilityRole="button" accessibilityLabel="Go back">
               <MaterialIcon name="icon-arrow-back" size={24} color={Colors.grey[900]} />
             </TouchableOpacity>
             <TouchableOpacity 

@@ -173,7 +173,7 @@ export const ContentDataFormats: React.FC<ContentDataFormatsProps> = ({
                                 </Text>
 
                                 {index === 1 && (
-                                    <TouchableOpacity onPress={onInfoPress}>
+                                    <TouchableOpacity onPress={onInfoPress} accessibilityRole="button" accessibilityLabel="About the estimated end date">
                                         <MaterialIcon
                                             name="info"
                                             size={16}

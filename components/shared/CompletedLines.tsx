@@ -20,16 +20,21 @@ export const CompletedLines: React.FC<CompletedLinesProps> = ({
   title = 'Line Completion',
   lines,
 }) => {
-  // Default lines A~H if not provided
+  // Default lines follow the harmonized Level 1 outline (E/F/K… sit in
+  // other levels, which is why the letters skip around)
   const defaultLines: LineItem[] = [
-    { name: 'Line A', current: 6, total: 10, isCompleted: false },
-    { name: 'Line B', current: 3, total: 3, isCompleted: true },
-    { name: 'Line C', current: 2, total: 2, isCompleted: true },
-    { name: 'Line D', current: 3, total: 6, isCompleted: false },
-    { name: 'Line E', current: 2, total: 10, isCompleted: false },
-    { name: 'Line F', current: 3, total: 8, isCompleted: false },
-    { name: 'Line G', current: 10, total: 10, isCompleted: true },
-    { name: 'Line H', current: 10, total: 10, isCompleted: true },
+    { name: 'Line A', current: 12, total: 22, isCompleted: false },
+    { name: 'Line B', current: 4, total: 4, isCompleted: true },
+    { name: 'Line C', current: 4, total: 4, isCompleted: true },
+    { name: 'Line D', current: 2, total: 4, isCompleted: false },
+    { name: 'Line G', current: 4, total: 4, isCompleted: true },
+    { name: 'Line H', current: 2, total: 4, isCompleted: false },
+    { name: 'Line I', current: 1, total: 4, isCompleted: false },
+    { name: 'Line J', current: 0, total: 4, isCompleted: false },
+    { name: 'Line L', current: 0, total: 4, isCompleted: false },
+    { name: 'Line Q', current: 0, total: 4, isCompleted: false },
+    { name: 'Line R', current: 0, total: 4, isCompleted: false },
+    { name: 'Line V', current: 0, total: 4, isCompleted: false },
   ];
   const renderLines = lines && lines.length > 0 ? lines : defaultLines;
 
@@ -70,14 +75,14 @@ export const CompletedLines: React.FC<CompletedLinesProps> = ({
 
 const styles = StyleSheet.create({
   lineCompletionCard: {
-    width: 392, // User requested precise width
+    // stretch to the shared 20px gutter so every card lines up
+    alignSelf: 'stretch',
     height: 252,
     backgroundColor: 'white',
     borderRadius: 20,
     padding: 20,
     marginBottom: 4,
     marginHorizontal: 20,
-    alignSelf: 'center',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.05,

@@ -133,6 +133,7 @@ export const Reminder: React.FC<ReminderProps> = ({
             iconComponent={<MaterialCommunityIcons name="chevron-right" size={20} color={Colors.grey[900]} />}
             variant="light"
             onPress={onHeaderPress}
+            accessibilityLabel="Open event calendar"
           />
         </TouchableOpacity>
         {/* Week date cards (calendarRow) restored */}
@@ -188,13 +189,12 @@ export const Reminder: React.FC<ReminderProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    width: 386,
-    alignSelf: 'center',
+    alignSelf: 'stretch',
   },
   card: {
     backgroundColor: Colors.white,
     borderRadius: 20,
-    width: 386,
+    width: '100%',
     height: 382,
     padding: 24,
     shadowColor: '#000',
@@ -299,18 +299,16 @@ const styles = StyleSheet.create({
     color: Colors.grey[500],
   },
   dividerLine: {
-    width: 321,
+    alignSelf: 'stretch',
     height: 1,
     backgroundColor: Colors.grey[50],
-    alignSelf: 'center',
     marginBottom: 16,
   },
   viewMoreButton: {
     backgroundColor: Colors.grey[50],
     borderRadius: 20,
-    width: 321,
+    alignSelf: 'stretch',
     height: 40,
-    alignSelf: 'center',
     justifyContent: 'center',
     alignItems: 'center',
   },

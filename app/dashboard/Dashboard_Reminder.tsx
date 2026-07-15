@@ -29,6 +29,19 @@ export default function DashboardReminderScreen() {
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
   const [pendingDeleteIndex, setPendingDeleteIndex] = useState<number | null>(null);
   const [reminderList, setReminderList] = useState<ReminderItem[]>(DEFAULT_REMINDERS);
+  // Calendar view defaults to the demo month (December 2025) but can page
+  // freely in both directions
+  const [viewMonth, setViewMonth] = useState({ monthIndex: 11, year: 2025 });
+
+  const stepMonth = (delta: number) => {
+    setViewMonth(({ monthIndex, year }) => {
+      let m = monthIndex + delta;
+      let y = year;
+      if (m < 0) { m = 11; y -= 1; }
+      if (m > 11) { m = 0; y += 1; }
+      return { monthIndex: m, year: y };
+    });
+  };
 
   // Helper: merge user reminders with defaults, removing deleted defaults
   function mergeReminders(userReminders: ReminderItem[]) {
@@ -179,7 +192,7 @@ export default function DashboardReminderScreen() {
         
         {/* Header */}
         <View style={styles.header}>
-          <TouchableOpacity style={styles.backButton} onPress={() => router.push('/(tabs)/Dashboard')}>
+          <TouchableOpacity style={styles.backButton} onPress={() => router.push('/(tabs)/Dashboard')} accessibilityRole="button" accessibilityLabel="Go back">
             <MaterialCommunityIcons name="arrow-left" size={24} color={Colors.grey[700]} />
           </TouchableOpacity>
           <View style={styles.titleWrapper}>
@@ -189,8 +202,12 @@ export default function DashboardReminderScreen() {
         </View>
 
         {/* Calendar and Reminders */}
-        <ReminderFullView 
-          reminders={reminderList.filter((r: ReminderItem) => !r.deleted)} 
+        <ReminderFullView
+          reminders={reminderList.filter((r: ReminderItem) => !r.deleted)}
+          monthIndex={viewMonth.monthIndex}
+          year={viewMonth.year}
+          onPrevMonth={() => stepMonth(-1)}
+          onNextMonth={() => stepMonth(1)}
           onAddReminder={() => setIsModalVisible(true)}
           onDeleteReminder={handleDeleteReminder}
         />
@@ -269,7 +286,7 @@ const styles = StyleSheet.create({
      shadowOpacity: 0.1,
      shadowRadius: 4,
      elevation: 2,
-     marginLeft: 24,
+     marginLeft: 20,
   },
   pageTitle: {
     fontFamily: 'SpaceGrotesk-Regular',

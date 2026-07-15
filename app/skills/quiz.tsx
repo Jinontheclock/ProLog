@@ -10,6 +10,7 @@ import { Colors } from "@/constants/colors";
 import { Spacing } from "@/constants/design-tokens";
 import { Typography } from "@/constants/typography";
 import { CommonStyles } from "@/lib/common-styles";
+import { completionStore } from "@/lib/completion-store";
 import { generateQuiz, QuizQuestion } from "@/lib/quizApi";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
@@ -49,6 +50,21 @@ const QuizPage: React.FC = () => {
   const [isAnswered, setIsAnswered] = useState(false);
   const [score, setScore] = useState(0);
   const [isCompleted, setIsCompleted] = useState(false);
+  const [recordedToChecklist, setRecordedToChecklist] = useState(false);
+
+  // Passing a competency quiz (80%+) records the sign-off in the checklist.
+  // The practice exam ("EXAM") spans many competencies, so it never records.
+  useEffect(() => {
+    if (!isCompleted || recordedToChecklist) return;
+    if (!skillId || skillId === "EXAM" || questions.length === 0) return;
+    if (score / questions.length < 0.8) return;
+
+    (async () => {
+      await completionStore.waitForInitialization();
+      await completionStore.setCompleted(skillId, true);
+      setRecordedToChecklist(true);
+    })();
+  }, [isCompleted, recordedToChecklist, skillId, score, questions.length]);
 
   // Load quiz questions on component mount
   useEffect(() => {
@@ -148,6 +164,7 @@ const QuizPage: React.FC = () => {
     setIsAnswered(false);
     setScore(0);
     setIsCompleted(false);
+    setRecordedToChecklist(false);
   };
 
   // Show quiz results when completed
@@ -159,6 +176,7 @@ const QuizPage: React.FC = () => {
           totalQuestions={questions.length}
           onBack={() => router.back()}
           onRetakeQuiz={handleRetakeQuiz}
+          recordedToChecklist={recordedToChecklist}
         />
       </SafeAreaView>
     );
@@ -209,6 +227,8 @@ const QuizPage: React.FC = () => {
           <TouchableOpacity
             style={styles.backButton}
             onPress={() => router.back()}
+            accessibilityRole="button"
+            accessibilityLabel="Exit quiz"
           >
             <MaterialIcon
               name="icon-arrow-back"

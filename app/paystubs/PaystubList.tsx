@@ -21,54 +21,56 @@ export default function PaystubListScreen() {
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   const years = ['2024', '2025'];
 
+  // Monthly stubs at a Level 2 apprentice rate (~$26/hr), with hours a
+  // real month can actually hold
   const allPaystubs = [
     {
       month: 'May',
       year: '2025',
-      company: 'Burquos Inc.',
-      receivedDate: 'June 7, 2025',
-      workHours: 162,
-      income: '$1,134',
+      company: 'Burquos Mills Inc.',
+      receivedDate: 'Jun 06, 2025',
+      workHours: 152,
+      income: '$3,952',
     },
     {
       month: 'April',
       year: '2025',
-      company: 'Burquos Inc.',
-      receivedDate: 'May 22, 2025',
-      workHours: 82,
-      income: '$2,258',
+      company: 'Burquos Mills Inc.',
+      receivedDate: 'May 08, 2025',
+      workHours: 168,
+      income: '$4,368',
     },
     {
       month: 'March',
       year: '2025',
-      company: 'Burquos Inc.',
-      receivedDate: 'Apr 31, 2025',
-      workHours: 312,
-      income: '$4,512',
+      company: 'Burquos Mills Inc.',
+      receivedDate: 'Apr 04, 2025',
+      workHours: 144,
+      income: '$3,744',
     },
     {
       month: 'February',
       year: '2025',
-      company: 'Burquos Inc.',
-      receivedDate: 'Mar 28, 2025',
-      workHours: 175,
-      income: '$2,852',
+      company: 'Burquos Mills Inc.',
+      receivedDate: 'Mar 07, 2025',
+      workHours: 160,
+      income: '$4,160',
     },
     {
       month: 'January',
       year: '2025',
-      company: 'Burquos Inc.',
-      receivedDate: 'Feb 12, 2025',
-      workHours: 291,
-      income: '$3,789',
+      company: 'Burquos Mills Inc.',
+      receivedDate: 'Feb 06, 2025',
+      workHours: 136,
+      income: '$3,536',
     },
     {
       month: 'December',
       year: '2024',
-      company: 'Burquos Inc.',
-      receivedDate: 'Jan 06, 2025',
-      workHours: 291,
-      income: '$3,789',
+      company: 'Burquos Mills Inc.',
+      receivedDate: 'Jan 09, 2025',
+      workHours: 120,
+      income: '$3,120',
     },
   ];
 
@@ -92,12 +94,12 @@ export default function PaystubListScreen() {
       >
         {/* Header */}
         <View style={styles.header}>
-          <TouchableOpacity style={styles.backButton} onPress={() => router.push('/(tabs)/Work')}>
+          <TouchableOpacity style={styles.backButton} onPress={() => router.push('/(tabs)/Work')} accessibilityRole="button" accessibilityLabel="Back to Work">
             <MaterialIcon name="icon-arrow-back" size={24} color={Colors.grey[900]} />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>Paystub Records</Text>
-          <TouchableOpacity style={styles.iconButton} onPress={() => router.push('/paystubs/DocumentScanner')}>
-            {/* <MaterialIcon name="document_scanner" size={24} color={Colors.grey[500]} /> */}
+          <TouchableOpacity style={styles.iconButton} onPress={() => router.push('/paystubs/DocumentScanner')} accessibilityRole="button" accessibilityLabel="Scan a document">
+            <MaterialIcon name="document_scanner" size={22} color={Colors.grey[500]} />
           </TouchableOpacity>
         </View>
 
@@ -187,6 +189,14 @@ export default function PaystubListScreen() {
         </View>
 
         {/* Paystub List */}
+        {filteredPaystubs.length === 0 && (
+          <View style={styles.emptyState}>
+            <MaterialIcon name="icon-search" size={28} color={Colors.grey[300]} />
+            <Text style={styles.emptyStateText}>
+              No paystubs for this period. Try a different month or year.
+            </Text>
+          </View>
+        )}
         {filteredPaystubs.map((paystub, index) => (
           <View key={index} style={styles.paystubCard}>
             <View style={styles.cardHeader}>
@@ -227,7 +237,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 24,
+    paddingHorizontal: 20,
     paddingTop: 24,
     paddingBottom: 16,
   },
@@ -251,18 +261,18 @@ const styles = StyleSheet.create({
   iconButton: {
     width: 44,
     height: 44,
-    // borderRadius: 22,
-    // backgroundColor: Colors.white,
-    // alignItems: 'center',
-    // justifyContent: 'center',
-    // borderWidth: 1,
-    // borderColor: Colors.grey[200],
+    borderRadius: 22,
+    backgroundColor: Colors.white,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: Colors.grey[200],
   },
   filtersContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
     gap: 8,
-    paddingHorizontal: 24,
+    paddingHorizontal: 20,
     marginBottom: 24,
     position: 'relative',
     zIndex: 1000,
@@ -335,12 +345,21 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 16,
     marginBottom: 12,
-    marginHorizontal: 24,
-    width: 353,
-    height: 193,
-    alignSelf: 'center',
+    marginHorizontal: 20,
+    alignSelf: 'stretch',
     borderWidth: 1,
     borderColor: Colors.grey[200],
+  },
+  emptyState: {
+    alignItems: 'center',
+    gap: 12,
+    paddingVertical: 48,
+    paddingHorizontal: 40,
+  },
+  emptyStateText: {
+    ...Typography.smBody,
+    color: Colors.grey[400],
+    textAlign: 'center',
   },
   cardHeader: {
     flexDirection: 'row',

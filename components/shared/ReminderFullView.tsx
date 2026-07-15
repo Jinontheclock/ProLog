@@ -1,7 +1,7 @@
 import { Colors } from '@/constants/colors';
 import { Typography } from '@/constants/typography';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 interface ReminderItem {
@@ -14,22 +14,34 @@ interface ReminderItem {
 
 interface ReminderFullViewProps {
   reminders?: ReminderItem[];
-  month?: string;
-  year?: string;
+  monthIndex?: number; // 0-based
+  year?: number;
   onPrevMonth?: () => void;
   onNextMonth?: () => void;
   onAddReminder?: () => void;
   onDeleteReminder?: (index: number) => void;
 }
 
+const MONTH_NAMES = [
+  'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December',
+];
+
+const MONTH_MAP: { [key: string]: number } = {
+  Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5,
+  Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11,
+};
+
+// The demo lives on Dec 5, 2025 — the highlighted "today"
+const DEMO_TODAY = { day: 5, monthIndex: 11, year: 2025 };
+
 export const ReminderFullView: React.FC<ReminderFullViewProps> = ({
   reminders = [
     { title: 'BCIT Tuition Deadline', date: 'Dec 07, 2025', day: 'Sunday' },
     { title: 'Apply For EI', date: 'Dec 31, 2025', day: 'Wednesday' },
-    
   ],
-  month = 'December',
-  year = '2025',
+  monthIndex = 11,
+  year = 2025,
   onPrevMonth,
   onNextMonth,
   onAddReminder,
@@ -38,54 +50,61 @@ export const ReminderFullView: React.FC<ReminderFullViewProps> = ({
   // Track selected date (number)
   const [selectedDate, setSelectedDate] = useState<number | null>(null);
 
-  // Helper: get all reminder dates as numbers (day of month)
-  const reminderDates = reminders.map(reminder => {
-    // Parse date string like 'Dec 2, 2025'
-    const match = reminder.date.match(/\w+ (\d{1,2}), \d{4}/);
-    if (match) {
-      return parseInt(match[1], 10);
-    }
-    return null;
-  }).filter(Boolean);
-  
-  const daysOfWeek = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
-  
-  // Generate calendar grid for the month
-  const generateCalendar = () => {
-    const weeks = [];
-    let currentWeek = [];
-    for (let i = 0; i < 7; i++) {
-      const date = i === 0 ? null : i;
-      currentWeek.push({ date });
-    }
-    weeks.push(currentWeek);
+  // Selection belongs to a month — clear it when the view moves on
+  useEffect(() => {
+    setSelectedDate(null);
+  }, [monthIndex, year]);
 
-    for (let weekStart = 7; weekStart <= 28; weekStart += 7) {
-      const week = [];
-      for (let day = 0; day < 7; day++) {
-        const date = weekStart + day;
-        if (date > 31) {
-          week.push({ date: null });
-        } else {
-          week.push({ date });
-        }
+  // Reminders that fall inside the displayed month, keeping each one's
+  // index into the full list so deletes still hit the right item
+  const monthReminders = reminders
+    .map((reminder, index) => {
+      const match = reminder.date.match(/(\w+) (\d{1,2}), (\d{4})/);
+      if (!match) return null;
+      const [, monthStr, dayStr, yearStr] = match;
+      if (MONTH_MAP[monthStr] !== monthIndex || parseInt(yearStr, 10) !== year) {
+        return null;
       }
-      weeks.push(week);
+      return { reminder, index, day: parseInt(dayStr, 10) };
+    })
+    .filter(Boolean) as { reminder: ReminderItem; index: number; day: number }[];
+
+  // Day numbers that carry a reminder in the displayed month
+  const reminderDates = monthReminders.map((entry) => entry.day);
+
+  const daysOfWeek = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+
+  // Real calendar grid for any month: leading blanks up to the first
+  // weekday, then the month's days, padded out to full weeks
+  const generateCalendar = () => {
+    const firstWeekday = new Date(year, monthIndex, 1).getDay();
+    const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
+
+    const cells: { date: number | null }[] = [];
+    for (let i = 0; i < firstWeekday; i++) cells.push({ date: null });
+    for (let day = 1; day <= daysInMonth; day++) cells.push({ date: day });
+    while (cells.length % 7 !== 0) cells.push({ date: null });
+
+    const weeks = [];
+    for (let i = 0; i < cells.length; i += 7) {
+      weeks.push(cells.slice(i, i + 7));
     }
     return weeks;
   };
 
   const calendar = generateCalendar();
+  const isTodayMonth =
+    monthIndex === DEMO_TODAY.monthIndex && year === DEMO_TODAY.year;
 
   return (
     <View style={styles.container}>
       <View style={styles.card}>
         <View style={styles.header}>
-          <TouchableOpacity style={styles.chevronButton} onPress={onPrevMonth}>
+          <TouchableOpacity style={styles.chevronButton} onPress={onPrevMonth} accessibilityRole="button" accessibilityLabel="Previous month">
             <MaterialCommunityIcons name="chevron-left" size={30} color={Colors.grey[300]} />
           </TouchableOpacity>
-          <Text style={styles.monthText}>{month} {year}</Text>
-          <TouchableOpacity style={styles.chevronButton} onPress={onNextMonth}>
+          <Text style={styles.monthText}>{MONTH_NAMES[monthIndex]} {year}</Text>
+          <TouchableOpacity style={styles.chevronButton} onPress={onNextMonth} accessibilityRole="button" accessibilityLabel="Next month">
             <MaterialCommunityIcons name="chevron-right" size={30} color={Colors.grey[300]} />
           </TouchableOpacity>
         </View>
@@ -109,8 +128,8 @@ export const ReminderFullView: React.FC<ReminderFullViewProps> = ({
                     <TouchableOpacity
                       style={[
                         styles.dateBox,
-                        // Only show background for 5th
-                        item.date === 5 && styles.selectedDateBox,
+                        // "Today" keeps its filled background in its month
+                        isTodayMonth && item.date === DEMO_TODAY.day && styles.selectedDateBox,
                         // Only show border for selected date
                         item.date === selectedDate && styles.borderedDateBox,
                       ]}
@@ -137,36 +156,42 @@ export const ReminderFullView: React.FC<ReminderFullViewProps> = ({
 
       <View style={styles.remindersSectionHeader}>
         <Text style={styles.remindersTitle}>Reminders</Text>
-        <TouchableOpacity style={styles.addButton} onPress={onAddReminder}>
+        <TouchableOpacity style={styles.addButton} onPress={onAddReminder} accessibilityRole="button" accessibilityLabel="Add reminder">
           <MaterialCommunityIcons name="plus" size={20} color={Colors.white} />
         </TouchableOpacity>
       </View>
 
       <View style={styles.remindersCard}>
-        <View style={styles.reminderList}>
-          {reminders.map((reminder, index) => (
-            <View key={index}>
-              <View style={styles.reminderItem}>
-                <View style={styles.reminderContent}>
-                  <View style={styles.reminderTitleRow}>
-                    <View style={styles.titleWithIndicator}>
-                      <Text style={styles.reminderTitle}>{reminder.title}</Text>
-                      {/* Orange circle for new reminders */}
-                      {reminder.isNew && <View style={styles.newIndicator} />}
+        {monthReminders.length === 0 ? (
+          <Text style={styles.emptyMonthText}>
+            No reminders in {MONTH_NAMES[monthIndex]} {year}.
+          </Text>
+        ) : (
+          <View style={styles.reminderList}>
+            {monthReminders.map(({ reminder, index }, position) => (
+              <View key={index}>
+                <View style={styles.reminderItem}>
+                  <View style={styles.reminderContent}>
+                    <View style={styles.reminderTitleRow}>
+                      <View style={styles.titleWithIndicator}>
+                        <Text style={styles.reminderTitle}>{reminder.title}</Text>
+                        {/* Orange circle for new reminders */}
+                        {reminder.isNew && <View style={styles.newIndicator} />}
+                      </View>
+                      <TouchableOpacity onPress={() => onDeleteReminder?.(index)} accessibilityRole="button" accessibilityLabel={`Delete reminder: ${reminder.title}`}>
+                        <MaterialCommunityIcons name="close" size={24} color={Colors.grey[300]} />
+                      </TouchableOpacity>
                     </View>
-                    <TouchableOpacity onPress={() => onDeleteReminder?.(index)}>
-                      <MaterialCommunityIcons name="close" size={24} color={Colors.grey[300]} />
-                    </TouchableOpacity>
+                    <Text style={styles.reminderDate}>
+                      {reminder.date} | {reminder.day}
+                    </Text>
                   </View>
-                  <Text style={styles.reminderDate}>
-                    {reminder.date} | {reminder.day}
-                  </Text>
                 </View>
+                {position < monthReminders.length - 1 && <View style={styles.reminderDivider} />}
               </View>
-              {index < reminders.length - 1 && <View style={styles.reminderDivider} />}
-            </View>
-          ))}
-        </View>
+            ))}
+          </View>
+        )}
       </View>
     </View>
   );
@@ -174,15 +199,14 @@ export const ReminderFullView: React.FC<ReminderFullViewProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    width: 354,
+    alignSelf: 'stretch',
+    marginHorizontal: 20,
     gap: 8,
-    alignSelf: 'center',
   },
   card: {
     backgroundColor: Colors.white,
     borderRadius: 20,
-    width: 386,
-    // height: 408,
+    width: '100%',
     padding: 24,
     shadowOffset: {
       width: 0,
@@ -191,7 +215,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.08,
     shadowRadius: 12,
     elevation: 4,
-    marginLeft: -16,
   },
   header: {
     flexDirection: 'row',
@@ -277,10 +300,9 @@ const styles = StyleSheet.create({
   remindersCard: {
     backgroundColor: Colors.white,
     borderRadius: 20,
-    width: 386,
+    width: '100%',
     padding: 24,
     shadowColor: '#000',
-        marginLeft: -16,
     shadowOffset: {
       width: 0,
       height: 4,
@@ -298,8 +320,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 8,
     marginTop: 8,
-    width: 386,
-        marginLeft: -16,
+    width: '100%',
   },
   remindersTitle: {
     fontFamily: 'SpaceGrotesk-Regular',
@@ -355,6 +376,12 @@ const styles = StyleSheet.create({
     height: 1,
     backgroundColor: Colors.grey[50],
     marginTop: 16,
+  },
+  emptyMonthText: {
+    ...Typography.smBody,
+    color: Colors.grey[400],
+    textAlign: 'center',
+    paddingVertical: 8,
   },
 });
 

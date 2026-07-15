@@ -28,6 +28,7 @@ export const DetailsHeading: React.FC<DetailsHeadingProps> = ({
             variant="light"
             size={48}
             onPress={onBack}
+            accessibilityLabel="Go back"
           />
         </View>
         <View style={{ alignSelf: 'flex-end' }}>

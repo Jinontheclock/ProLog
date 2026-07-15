@@ -1,11 +1,30 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { DarkTheme, DefaultTheme, ThemeProvider } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
+import { Platform } from "react-native";
 import "react-native-reanimated";
 
 import { useColorScheme } from "@/hooks/use-color-scheme";
+import { ExternalLinkProvider } from "@/lib/external-link";
+
+// Portfolio demo build: reset per-visit state so each visitor starts fresh.
+if (Platform.OS === "web") {
+  AsyncStorage.removeItem("reminders").catch(() => {});
+
+  // Pin the app's edges: no rubber-band blank above/below any scroll view on
+  // iOS Safari. The journey map opts back in (data-allowoverscroll) so its
+  // inner scroll can hand off to the page when it runs out.
+  const style = document.createElement("style");
+  style.textContent = `
+    html, body { overscroll-behavior: none; }
+    * { overscroll-behavior-y: none; }
+    [data-allowoverscroll] { overscroll-behavior-y: auto; }
+  `;
+  document.head.appendChild(style);
+}
 
 SplashScreen.preventAutoHideAsync();
 
@@ -40,11 +59,13 @@ export default function RootLayout() {
 
     return (
         <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-            <Stack screenOptions={{ headerShown: false }}>
-                <Stack.Screen name='login' options={{ headerShown: false }} />
-                <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
-                <Stack.Screen name='+not-found' />
-            </Stack>
+            <ExternalLinkProvider>
+                <Stack screenOptions={{ headerShown: false }}>
+                    <Stack.Screen name='login' options={{ headerShown: false }} />
+                    <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
+                    <Stack.Screen name='+not-found' />
+                </Stack>
+            </ExternalLinkProvider>
         </ThemeProvider>
     );
 }

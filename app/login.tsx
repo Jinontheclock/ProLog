@@ -34,15 +34,22 @@ export default function LoginScreen() {
             <Text style={styles.sloganText}>See Where You're Going.</Text>
           </View>
           <View style={styles.buttonContainer}>
-            <Button 
-              text="Sign up" 
-              variant="primary" 
+            {/* portfolio visitors can skip straight into the app */}
+            <Button
+              text="Start Demo"
+              variant="secondary"
+              fullWidth={true}
+              onPress={() => router.push("/(tabs)/Dashboard")}
+            />
+            <Button
+              text="Sign up"
+              variant="primary"
               fullWidth={true}
               onPress={() => router.push("/login_credentials")}
             />
-            <Button 
-              text="Login" 
-              variant="dark" 
+            <Button
+              text="Login"
+              variant="dark"
               fullWidth={true}
               onPress={() => router.push("/(tabs)/Dashboard")}
             />

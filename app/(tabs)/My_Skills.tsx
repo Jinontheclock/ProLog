@@ -1,7 +1,9 @@
 import { CompetencyListItem } from "@/components/shared/CompetencyListItem";
 import { ExamPrep } from "@/components/shared/ExamPrep";
+import { InformationalMessage } from "@/components/shared/InformationalMessage";
 import { LineCarousel } from "@/components/shared/LineCarousel";
 import { LineDescription } from "@/components/shared/LineDescription";
+import { LoadingQuiz } from "@/components/shared/LoadingQuiz";
 import MaterialIcon from "@/components/shared/MaterialIcon";
 import { PageSwitch } from "@/components/shared/PageSwitch";
 import { SectionHeading } from "@/components/shared/SectionHeading";
@@ -18,6 +20,7 @@ import {
 
 // Import the competency data
 import { Colors } from "@/constants";
+import { LINE_INFO, LINE_LETTERS } from '@/data/lines';
 import skillsData from '@/data/skills-competency-summary.json';
 
 type CompetencyItem = {
@@ -46,10 +49,12 @@ export default function SkillsScreen() {
   const [showPracticalDropdown, setShowPracticalDropdown] = React.useState(false);
   const [showTheoreticalDropdown, setShowTheoreticalDropdown] = React.useState(false);
 
-  // Process competency data from JSON
-  const lineACompetencies = skillsData['level 1']['Line A'] as CompetencyItem[];
-  const theoryCompetencies = lineACompetencies.filter(comp => comp.Category === 'Theory');
-  const practicalCompetencies = lineACompetencies.filter(comp => comp.Category === 'Practical');
+  // Competency data follows whichever line each tab has selected
+  const levelData = skillsData['level 1'] as Record<string, CompetencyItem[]>;
+  const practicalCompetencies = (levelData[`Line ${selectedPracticalLine}`] ?? [])
+    .filter(comp => comp.Category === 'Practical');
+  const theoryCompetencies = (levelData[`Line ${selectedTheoreticalLine}`] ?? [])
+    .filter(comp => comp.Category === 'Theory');
 
   // Subscribe to completion store changes
   React.useEffect(() => {
@@ -102,14 +107,23 @@ export default function SkillsScreen() {
     });
   };
 
-  // Function to uncheck all competencies
-  const handleUncheckAll = async () => {
-    try {
-      await completionStore.clearAll();
-      console.log('All competencies unchecked successfully');
-    } catch (error) {
-      console.error('Error clearing competencies:', error);
-    }
+  // Update button: simulates a sync with SkilledTradesBC — newly verified
+  // sign-offs land and the header counts move (before ↔ after, like the
+  // other tabs' demo states)
+  const [syncState, setSyncState] = React.useState<'before' | 'after'>('before');
+  const [isSyncing, setIsSyncing] = React.useState(false);
+  const [showExamInfoModal, setShowExamInfoModal] = React.useState(false);
+  const headerData =
+    syncState === 'before'
+      ? { hours: 28, percentage: 35 }
+      : { hours: 34, percentage: 42 };
+  const handleSync = () => {
+    if (isSyncing) return;
+    setIsSyncing(true);
+    setTimeout(() => {
+      setSyncState((current) => (current === 'before' ? 'after' : 'before'));
+      setTimeout(() => setIsSyncing(false), 2000);
+    }, 300);
   };
 
   return (
@@ -131,12 +145,13 @@ export default function SkillsScreen() {
           level="Level 2"
           title="Skills Competency"
           icon_action="cached"
-          currentHours={0} // Example value
-          totalHours={81} // Example value
-          percentage={0} // Example value
+          currentHours={headerData.hours}
+          totalHours={81}
+          percentage={headerData.percentage}
           hrsText=""
           hoursIcon="electric_bolt"
-          onIconPress={handleUncheckAll}
+          onIconPress={handleSync}
+          isLoading={isSyncing}
         />
 
         {/* Tab Navigation */}
@@ -180,7 +195,7 @@ export default function SkillsScreen() {
             <View style={styles.examPrepSection}>
               <View style={styles.examPrepHeader}>
                 <Text style={styles.examPrepTitle}>Exam Prep</Text>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => setShowExamInfoModal(true)} accessibilityRole="button" accessibilityLabel="About exam prep">
                   <MaterialIcon name="info" size={20} color={Colors.grey[400]} />
                 </TouchableOpacity>
               </View>
@@ -202,7 +217,7 @@ export default function SkillsScreen() {
             {/* Line Carousel */}
             <View style={styles.tabComponentContainer}>
               <LineCarousel
-                lines={["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]}
+                lines={[...LINE_LETTERS]}
                 selectedLine={selectedPracticalLine}
                 onLineSelect={(line) => setSelectedPracticalLine(line)}
               />
@@ -212,8 +227,8 @@ export default function SkillsScreen() {
             <View style={styles.tabComponentContainer}>
               <LineDescription
                 title={`Line ${selectedPracticalLine}`}
-                description="Description"
-                content="Learn practical electrical skills through real-world applications and laboratory exercises."
+                description={LINE_INFO[selectedPracticalLine]?.title ?? ""}
+                content={LINE_INFO[selectedPracticalLine]?.blurb ?? ""}
               />
             </View>
 
@@ -297,7 +312,7 @@ export default function SkillsScreen() {
             {/* Line Carousel */}
             <View style={styles.tabComponentContainer}>
               <LineCarousel
-                lines={["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]}
+                lines={[...LINE_LETTERS]}
                 selectedLine={selectedTheoreticalLine}
                 onLineSelect={(line) => setSelectedTheoreticalLine(line)}
               />
@@ -307,8 +322,8 @@ export default function SkillsScreen() {
             <View style={styles.tabComponentContainer}>
               <LineDescription
                 title={`Line ${selectedTheoreticalLine}`}
-                description="Description"
-                content="Master the theoretical foundations of electrical engineering and circuit analysis."
+                description={LINE_INFO[selectedTheoreticalLine]?.title ?? ""}
+                content={LINE_INFO[selectedTheoreticalLine]?.blurb ?? ""}
               />
             </View>
 
@@ -387,8 +402,32 @@ export default function SkillsScreen() {
           </View>
         )}
       </ScrollView>
-      
 
+      {/* Exam Prep Info Modal */}
+      {showExamInfoModal && (
+        <TouchableOpacity
+          style={styles.modalOverlay}
+          activeOpacity={1}
+          onPress={() => setShowExamInfoModal(false)}
+        >
+          <TouchableOpacity
+            activeOpacity={1}
+            onPress={(e) => e.stopPropagation()}
+          >
+            <InformationalMessage message="Exam Prep generates a practice exam that samples questions across every Level 1 line, mirroring the standardized level exam format." />
+          </TouchableOpacity>
+        </TouchableOpacity>
+      )}
+
+      {/* Updating overlay — same treatment as the other tabs */}
+      {isSyncing && (
+        <View style={styles.loadingOverlay}>
+          <LoadingQuiz
+            loadingTitle="Updating Data..."
+            loadingContent="Please wait while we sync your competency records with your training authority."
+          />
+        </View>
+      )}
     </View>
   );
 }
@@ -396,13 +435,35 @@ export default function SkillsScreen() {
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    paddingHorizontal: 24,
+    paddingHorizontal: 20,
     paddingTop: 24,
   },
   overallContainer: {
-    paddingHorizontal: 24,
+    paddingHorizontal: 20,
     gap: 24,
     flex: 1,
+  },
+  loadingOverlay: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 10000,
+  },
+  modalOverlay: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "rgba(44, 44, 44, 0.18)",
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 9999,
   },
   componentContainer: {
     alignItems: "center",
@@ -425,7 +486,7 @@ const styles = StyleSheet.create({
     color: Colors.grey[700],
   },
   tabContentContainer: {
-    paddingHorizontal: 24,
+    paddingHorizontal: 20,
     // paddingTop: 24,
     gap: 20,
   },

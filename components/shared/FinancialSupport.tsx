@@ -2,11 +2,14 @@ import React, { useRef, useState } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { Colors } from '@/constants/colors';
+import { useExternalLink } from '@/lib/external-link';
 import { MaterialIcon } from './MaterialIcon';
 
 interface SupportItem {
   title: string;
   description: string;
+  url?: string;
+  site?: string;
 }
 
 interface FinancialSupportProps {
@@ -15,6 +18,7 @@ interface FinancialSupportProps {
 
 export const FinancialSupport: React.FC<FinancialSupportProps> = ({ supportItems }) => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const openExternal = useExternalLink();
   const scrollViewRef = useRef<ScrollView>(null);
 
   const handleScroll = (event: any) => {
@@ -45,7 +49,16 @@ export const FinancialSupport: React.FC<FinancialSupportProps> = ({ supportItems
         overScrollMode="never"
       >
         {supportItems.map((item, index) => (
-          <TouchableOpacity key={index} style={styles.card}>
+          <TouchableOpacity
+            key={index}
+            style={styles.card}
+            disabled={!item.url}
+            onPress={() =>
+              item.url && openExternal(item.url, item.site ?? item.title.replace("\n", " "))
+            }
+            accessibilityRole="button"
+            accessibilityLabel={`Open ${item.site ?? item.title.replace("\n", " ")} in a new window`}
+          >
             <View style={styles.cardContent}>
               <View style={styles.titleRow}>
                 <Text style={styles.cardTitle}>{item.title}</Text>

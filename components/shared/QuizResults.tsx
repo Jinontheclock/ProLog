@@ -20,6 +20,7 @@ interface QuizResultsProps {
   totalQuestions: number;
   onBack: () => void;
   onRetakeQuiz: () => void;
+  recordedToChecklist?: boolean;
 }
 
 export default function QuizResults({
@@ -27,6 +28,7 @@ export default function QuizResults({
   totalQuestions,
   onBack,
   onRetakeQuiz,
+  recordedToChecklist = false,
 }: QuizResultsProps) {
   const percentage = Math.round((score / totalQuestions) * 100);
   const currentDate = new Date().toLocaleDateString();
@@ -39,7 +41,7 @@ export default function QuizResults({
       />
       {/* Header with Back Button */}
       <View style={styles.pageHeader}>
-        <TouchableOpacity style={styles.headerBackButton} onPress={onBack}>
+        <TouchableOpacity style={styles.headerBackButton} onPress={onBack} accessibilityRole="button" accessibilityLabel="Go back">
           <MaterialIcon
             name="icon-arrow-back"
             size={24}
@@ -75,6 +77,18 @@ export default function QuizResults({
                   ? "Good job! Come back anytime to challenge it again to improve your understanding."
                   : "Keep practicing! Review the material and try again to improve your score."}
               </Text>
+              {recordedToChecklist && (
+                <View style={styles.recordedBanner}>
+                  <MaterialIcon
+                    name="check"
+                    size={16}
+                    color={Colors.orange[500]}
+                  />
+                  <Text style={styles.recordedBannerText}>
+                    Recorded in your competency checklist
+                  </Text>
+                </View>
+              )}
             </View>
           </View>
           <View style={styles.resultComparison}>
@@ -199,6 +213,22 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: Colors.grey[900],
     marginBottom: 16,
+  },
+  recordedBanner: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 8,
+    backgroundColor: Colors.orange[50],
+    borderRadius: 12,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    marginTop: 16,
+    alignSelf: "center",
+  },
+  recordedBannerText: {
+    ...Typography.smBody,
+    color: Colors.orange[700],
   },
   scoreMessage: {
     ...Typography.bigBody,

@@ -37,11 +37,11 @@ export const CompetencyCompletion: React.FC<CompetencyCompletionProps> = ({
       <View style={styles.sectionHeader}>
         <Text style={styles.sectionTitle}>{title}</Text>
         {showInfoIcon && (
-          <TouchableOpacity onPress={onInfoPress}>
+          <TouchableOpacity onPress={onInfoPress} accessibilityRole="button" accessibilityLabel="About completion details">
             <MaterialIcon
               name="info"
               size={20}
-              color="#999"
+              color={Colors.grey[400]}
             />
           </TouchableOpacity>
         )}
@@ -53,7 +53,7 @@ export const CompetencyCompletion: React.FC<CompetencyCompletionProps> = ({
             <MaterialIcon
               name="check_box"
               size={20}
-              color="#999"
+              color={Colors.grey[400]}
             />
             <Text style={styles.detailsLabel} numberOfLines={1} ellipsizeMode="tail">{checkboxLabel}</Text>
           </View>
@@ -73,7 +73,7 @@ export const CompetencyCompletion: React.FC<CompetencyCompletionProps> = ({
               cx={size / 2}
               cy={size / 2}
               r={radius}
-              stroke="#E5E7EB"
+              stroke={Colors.grey[100]}
               strokeWidth={strokeWidth}
               fill="transparent"
             />

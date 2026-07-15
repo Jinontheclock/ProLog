@@ -49,6 +49,7 @@ export const SchoolSlots: React.FC<SchoolSlotsProps> = ({ campuses }) => {
               variant="primary"
               size={40}
               onPress={campus.onPress}
+              accessibilityLabel={`View ${campus.name} details`}
             />
           </View>
 

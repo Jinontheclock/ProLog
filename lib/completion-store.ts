@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Platform } from 'react-native';
 
 // Persistent global completion store using AsyncStorage
 class CompletionStore {
@@ -102,5 +103,16 @@ class CompletionStore {
 // Export a singleton instance
 export const completionStore = new CompletionStore();
 
-// Initialize the store on import
-completionStore.initialize();
+// Portfolio demo build: each visit starts clean, so wipe any completions a
+// previous visitor left in this browser before loading the store.
+async function bootstrap() {
+  if (Platform.OS === 'web') {
+    try {
+      await AsyncStorage.removeItem('competency_completions');
+    } catch {
+      // ignore — falls back to whatever is stored
+    }
+  }
+  completionStore.initialize();
+}
+bootstrap();

@@ -25,7 +25,40 @@ import { Colors } from "@/constants/colors";
 import { Typography } from "@/constants/typography";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 import dimensions from "@/lib/dimensions";
+import { router } from "expo-router";
 import { Platform } from "react-native";
+
+// In-school record for the Skills tab: theory sign-offs per line, before and
+// after a sync. Totals mirror data/skills-competency-summary.json.
+const SKILLS_RECORD = {
+    theory: {
+        completed: { before: 14, after: 22 },
+        total: 36,
+        lastUpdated: { before: "Dec 05, 2025", after: "Dec 12, 2025" },
+    },
+    lines: [
+        { name: "Line A", total: 16, before: 7, after: 11 },
+        { name: "Line B", total: 2, before: 2, after: 2 },
+        { name: "Line C", total: 1, before: 1, after: 1 },
+        { name: "Line D", total: 2, before: 1, after: 2 },
+        { name: "Line G", total: 2, before: 2, after: 2 },
+        { name: "Line H", total: 2, before: 1, after: 2 },
+        { name: "Line I", total: 2, before: 0, after: 1 },
+        { name: "Line J", total: 2, before: 0, after: 1 },
+        { name: "Line L", total: 2, before: 0, after: 0 },
+        { name: "Line Q", total: 1, before: 0, after: 0 },
+        { name: "Line R", total: 2, before: 0, after: 0 },
+        { name: "Line V", total: 2, before: 0, after: 0 },
+    ],
+};
+
+// Campus details surfaced when a Next Enrollment card is tapped
+const CAMPUS_INFO: Record<string, string> = {
+    "BCIT Burnaby Campus":
+        "BCIT Burnaby Campus — 3700 Willingdon Ave, Burnaby. Level 2 Industrial Electrician runs 10 weeks, full-time. Use Add Enrollment on the Program tab to register for a slot.",
+    "North Delta Secondary":
+        "North Delta Secondary — 11447 82 Ave, Delta. Evening and weekend Level 2 intakes for working apprentices. Use Add Enrollment on the Program tab to register for a slot.",
+};
 
 export default function SchoolScreen() {
     const colorScheme = useColorScheme();
@@ -45,6 +78,7 @@ export default function SchoolScreen() {
     const [showInfoModal, setShowInfoModal] = useState(false);
     const [showCompetencyInfoModal, setShowCompetencyInfoModal] =
         useState(false);
+    const [campusInfo, setCampusInfo] = useState<string | null>(null);
     const [demoState, setDemoState] = useState<"before" | "after">("before");
     const [isLoading, setIsLoading] = useState(false);
 
@@ -75,8 +109,15 @@ export default function SchoolScreen() {
             // End loading after state change
             setTimeout(() => {
                 setIsLoading(false);
-            }, 6000); // Additional time for progress bar animation
+            }, 2200); // Additional time for progress bar animation
         }, 300);
+    };
+
+    // The sync always lands new data: exam/heading rows once a program is
+    // registered, and the Skills-tab record in every state
+    const handleUpdatePress = () => {
+        if (isLoading) return;
+        toggleDemoState();
     };
 
     // Get school page data
@@ -150,10 +191,38 @@ export default function SchoolScreen() {
                             ? schoolPageData.sectionHeading.percentage.before 
                             : getCurrentData(schoolPageData.sectionHeading.percentage)
                     }
-                    onIconPress={isProgramRegistered ? toggleDemoState : undefined}
+                    onIconPress={handleUpdatePress}
                     isLoading={isLoading}
                     hrsText="weeks"
                 />
+
+                {/* Not enrolled yet — explain why the header sits at zero and
+                    shortcut straight into the enrollment form */}
+                {!isProgramRegistered && !isLoadingProgram && (
+                    <TouchableOpacity
+                        style={styles.enrollHintBanner}
+                        onPress={() => {
+                            setSelectedTab("program");
+                            setShowEnrollmentModal(true);
+                        }}
+                        activeOpacity={0.8}
+                    >
+                        <MaterialIcon
+                            name="info"
+                            size={16}
+                            color={Colors.orange[700]}
+                        />
+                        <Text style={styles.enrollHintText}>
+                            Not enrolled yet — add your enrollment to start
+                            tracking
+                        </Text>
+                        <MaterialIcon
+                            name="icon-arrow-forward"
+                            size={16}
+                            color={Colors.orange[700]}
+                        />
+                    </TouchableOpacity>
+                )}
 
                 {/* Tab Navigation */}
                 <PageSwitch
@@ -318,6 +387,11 @@ export default function SchoolScreen() {
                                         </Text>
                                         <TouchableOpacity
                                             style={styles.nextLevelButton}
+                                            onPress={() =>
+                                                router.push(
+                                                    "/(tabs)/Dashboard"
+                                                )
+                                            }
                                         >
                                             <Text
                                                 style={styles.nextLevelButtonText}
@@ -341,7 +415,7 @@ export default function SchoolScreen() {
                                         <MaterialIcon
                                             name="help_outline"
                                             size={20}
-                                            color="#616161"
+                                            color={Colors.grey[600]}
                                         />
                                         <Text style={styles.promptTitle}>
                                             Have you enrolled yet?
@@ -722,11 +796,13 @@ export default function SchoolScreen() {
                             </Text>
                             <TouchableOpacity
                                 onPress={() => setShowInfoModal(true)}
+                                accessibilityRole="button"
+                                accessibilityLabel="About next enrollment"
                             >
                                 <MaterialIcon
                                     name="info"
                                     size={20}
-                                    color="#999"
+                                    color={Colors.grey[400]}
                                 />
                             </TouchableOpacity>
                         </View>
@@ -760,8 +836,8 @@ export default function SchoolScreen() {
                                         },
                                     ],
                                     onPress: () =>
-                                        console.log(
-                                            "BCIT Burnaby Campus pressed"
+                                        setCampusInfo(
+                                            CAMPUS_INFO["BCIT Burnaby Campus"]
                                         ),
                                 },
                                 {
@@ -791,8 +867,8 @@ export default function SchoolScreen() {
                                         },
                                     ],
                                     onPress: () =>
-                                        console.log(
-                                            "North Delta Secondary pressed"
+                                        setCampusInfo(
+                                            CAMPUS_INFO["North Delta Secondary"]
                                         ),
                                 },
                             ]}
@@ -808,73 +884,41 @@ export default function SchoolScreen() {
                             showInfoIcon={true}
                             onInfoPress={() => setShowCompetencyInfoModal(true)}
                             checkboxLabel="Theoretical Competencies"
-                            current={18}
-                            total={47}
-                            lastUpdated="Mar 12, 2025"
+                            current={
+                                isLoading
+                                    ? SKILLS_RECORD.theory.completed.before
+                                    : getCurrentData(
+                                          SKILLS_RECORD.theory.completed
+                                      )
+                            }
+                            total={SKILLS_RECORD.theory.total}
+                            lastUpdated={getCurrentData(
+                                SKILLS_RECORD.theory.lastUpdated
+                            )}
                             progressImage={require("@/assets/images/Group 46.png")}
                         />
 
                         {/* Line Completion */}
                         <CompletedLines
                             title="Line Completion"
-                            lines={[
-                                {
-                                    name: "Line A",
-                                    current: 12,
-                                    total: 16,
-                                    isCompleted: false,
-                                },
-                                {
-                                    name: "Line B",
-                                    current: 3,
-                                    total: 3,
-                                    isCompleted: true,
-                                },
-                                {
-                                    name: "Line C",
-                                    current: 2,
-                                    total: 2,
-                                    isCompleted: true,
-                                },
-                                {
-                                    name: "Line D",
-                                    current: 3,
-                                    total: 6,
-                                    isCompleted: false,
-                                },
-                                {
-                                    name: "Line E",
-                                    current: 2,
-                                    total: 10,
-                                    isCompleted: false,
-                                },
-                                {
-                                    name: "Line F",
-                                    current: 3,
-                                    total: 8,
-                                    isCompleted: false,
-                                },
-                                {
-                                    name: "Line G",
-                                    current: 10,
-                                    total: 10,
-                                    isCompleted: true,
-                                },
-                                {
-                                    name: "Line H",
-                                    current: 10,
-                                    total: 10,
-                                    isCompleted: true,
-                                },
-                            ]}
+                            lines={SKILLS_RECORD.lines.map((line) => {
+                                const current = getCurrentData({
+                                    before: line.before,
+                                    after: line.after,
+                                });
+                                return {
+                                    name: line.name,
+                                    current,
+                                    total: line.total,
+                                    isCompleted: current >= line.total,
+                                };
+                            })}
                         />
 
                         {/* View Checklist Button */}
                         <TouchableOpacity
                             style={styles.viewChecklistButton}
-                            onPress={() =>
-                                console.log("View Checklist pressed")
-                            }
+                            onPress={() => router.push("/school/checklist")}
                         >
                             <Text style={styles.viewChecklistButtonText}>
                                 View Checklist
@@ -896,18 +940,26 @@ export default function SchoolScreen() {
                                 {
                                     title: "Canada Apprentice Loan",
                                     description: "Interest-free loans for each period of technical training",
+                                    url: "https://www.canada.ca/en/services/jobs/training/support-skilled-trades-apprentices/loan.html",
+                                    site: "Canada.ca",
                                 },
                                 {
                                     title: "Provincial Grant",
                                     description: "Financial assistance for apprentices in technical training",
+                                    url: "https://skilledtradesbc.ca/financial-support",
+                                    site: "SkilledTradesBC",
                                 },
                                 {
                                     title: "Employer Sponsorship",
                                     description: "Support from employers for educational expenses",
+                                    url: "https://www.workbc.ca/develop-skills/funding-grants-learners/services-apprentices-and-employers",
+                                    site: "WorkBC",
                                 },
                                 {
                                     title: "Scholarship Programs",
                                     description: "Merit-based financial awards for skilled trades students",
+                                    url: "https://www.bcit.ca/financial-aid/",
+                                    site: "BCIT Financial Aid",
                                 },
                             ]}
                         />
@@ -920,7 +972,7 @@ export default function SchoolScreen() {
                             <MaterialIcon
                                 name="info"
                                 size={20}
-                                color="#999"
+                                color={Colors.grey[400]}
                             />
                         </View>
                         <Text style={styles.financeSectionSubtitle}>
@@ -1006,6 +1058,22 @@ export default function SchoolScreen() {
                 </TouchableOpacity>
             )}
 
+            {/* Campus Info Modal */}
+            {campusInfo && (
+                <TouchableOpacity
+                    style={styles.modalOverlay}
+                    activeOpacity={1}
+                    onPress={() => setCampusInfo(null)}
+                >
+                    <TouchableOpacity
+                        activeOpacity={1}
+                        onPress={(e) => e.stopPropagation()}
+                    >
+                        <InformationalMessage message={campusInfo} />
+                    </TouchableOpacity>
+                </TouchableOpacity>
+            )}
+
             {/* Competency Info Modal */}
             {showCompetencyInfoModal && (
                 <TouchableOpacity
@@ -1052,7 +1120,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
     },
     skeletonText: {
-        backgroundColor: "#E1E1E1",
+        backgroundColor: Colors.grey[100],
         borderRadius: 4,
     },
     loadingOverlay: {
@@ -1209,6 +1277,24 @@ const styles = StyleSheet.create({
         fontSize: 12,
         color: "#999",
         marginTop: 4,
+    },
+    enrollHintBanner: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: 8,
+        backgroundColor: Colors.orange[50],
+        borderRadius: 12,
+        paddingVertical: 10,
+        paddingHorizontal: 16,
+        marginHorizontal: 20,
+        marginTop: 12,
+        marginBottom: -4,
+    },
+    enrollHintText: {
+        ...Typography.smBody,
+        color: Colors.orange[700],
+        flexShrink: 1,
     },
     enrollmentPrompt: {
         backgroundColor: "white",
@@ -1495,7 +1581,7 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.white,
         borderRadius: 20,
         padding: 20,
-        marginHorizontal: 24,
+        marginHorizontal: 20,
         marginBottom: 24,
         height: 119,
         flexDirection: "row",
@@ -1563,7 +1649,7 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.white,
         borderRadius: 20,
         padding: 20,
-        marginHorizontal: 24,
+        marginHorizontal: 20,
         marginBottom: 24,
         height: 176,
         ...Platform.select({

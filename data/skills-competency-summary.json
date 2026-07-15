@@ -3,7 +3,7 @@
     "Line A": [
       {
         "id": "A1",
-        "Title": "Describe Operating Principles of Parallel Circuits",
+        "Title": "Describe Basic Electrical Circuit Concepts",
         "Summary": [
           {
             "Section": "Overview",
@@ -31,7 +31,7 @@
       },
       {
         "id": "A2",
-        "Title": "Operating Principles of Series Circuits",
+        "Title": "Describe Operating Principles of Series Circuits",
         "Summary": [
           {
             "Section": "Overview",
@@ -87,7 +87,7 @@
       },
       {
         "id": "A4",
-        "Title": "Describe Operating Principles Of Parallel Circuits",
+        "Title": "Describe Operating Principles of Parallel Circuits",
         "Summary": [
           {
             "Section": "Overview",
@@ -143,7 +143,7 @@
       },
       {
         "id": "A6",
-        "Title": "Operating Principles Of Combination Circuits",
+        "Title": "Describe Operating Principles of Combination Circuits",
         "Summary": [
           {
             "Section": "Overview",
@@ -199,7 +199,7 @@
       },
       {
         "id": "A8",
-        "Title": "The Operating Principles Of Voltage Dividers",
+        "Title": "Describe Operating Principles of Voltage Dividers",
         "Summary": [
           {
             "Section": "Overview",
@@ -247,7 +247,7 @@
       },
       {
         "id": "A10",
-        "Title": "Describe The Operating Principles Of Bridge Circuits",
+        "Title": "Describe Operating Principles of Bridge Circuits",
         "Summary": [
           {
             "Section": "Overview",
@@ -295,7 +295,7 @@
       },
       {
         "id": "A12",
-        "Title": "Describe The Operating Principles Of Three-Wire Circuits",
+        "Title": "Describe Operating Principles of Three-Wire Circuits",
         "Summary": [
           {
             "Section": "Overview",
@@ -343,7 +343,7 @@
       },
       {
         "id": "A14",
-        "Title": "Describe The Principles Of Electromagnetism",
+        "Title": "Describe Principles of Electromagnetism",
         "Summary": [
           {
             "Section": "Overview",
@@ -367,7 +367,7 @@
       },
       {
         "id": "A15",
-        "Title": "Describe The Operating Principles Of Diodes In DC Circuits",
+        "Title": "Describe Operating Principles of Diodes in DC Circuits",
         "Summary": [
           {
             "Section": "Overview",
@@ -391,7 +391,7 @@
       },
       {
         "id": "A16",
-        "Title": "Describe The Operating Principles Of BJTs In DC Circuits",
+        "Title": "Describe Operating Principles of BJTs in DC Circuits",
         "Summary": [
           {
             "Section": "Overview",
@@ -463,7 +463,7 @@
       },
       {
         "id": "A19",
-        "Title": "Perform Meter Readings To Verify Circuit Concepts",
+        "Title": "Perform Meter Readings to Verify Circuit Concepts",
         "Summary": [
           {
             "Section": "Overview",
@@ -511,7 +511,7 @@
       },
       {
         "id": "A21",
-        "Title": "Connect And Test Diodes In DC Circuits",
+        "Title": "Connect and Test Diodes in DC Circuits",
         "Summary": [
           {
             "Section": "Overview",
@@ -535,7 +535,7 @@
       },
       {
         "id": "A22",
-        "Title": "Connect And Test BJTs In DC Electronic Circuits",
+        "Title": "Connect and Test BJTs in DC Electronic Circuits",
         "Summary": [
           {
             "Section": "Overview",
@@ -556,6 +556,908 @@
         ],
         "Category": "Practical",
         "Quiz": "Connecting and testing Bipolar Junction Transistors (BJTs) in DC circuits requires understanding their structure, function, and biasing conditions. BJTs consist of emitter, base, and collector terminals, and correct circuit operation depends on establishing proper voltage and current relationships between these regions. In testing, learners verify transistor orientation (NPN or PNP), junction integrity, and appropriate bias voltages using a digital multimeter or transistor tester.\n\nIn DC circuits, BJTs are often used as amplifiers or switches. Proper connection ensures the base-emitter junction is forward-biased and the collector-base junction is reverse-biased during active operation. Testing confirms that gain (β) and current flow are within expected parameters, which is critical for maintaining signal stability and circuit performance.\n\nBy developing the ability to connect and test BJTs, learners gain essential skills in electronic troubleshooting and system optimization. These procedures support reliable operation of amplifiers, control devices, and other DC electronic systems used throughout industrial and automation applications."
+      }
+    ],
+    "Line B": [
+      {
+        "id": "B1",
+        "Title": "Describe Electrical Safety Regulations",
+        "Summary": [
+          {
+            "Section": "Overview",
+            "Content": "Electrical work in BC is governed by the WorkSafeBC Occupational Health and Safety Regulation and guided by CSA Z462, the workplace electrical safety standard. Together they set out who may work on electrical equipment, when it must be de-energized, and what procedures protect workers from shock and arc flash."
+          },
+          {
+            "Section": "Key Points",
+            "Content": "De-energize before working whenever possible. Verify the absence of voltage with a tested meter. Energized work needs justification, a plan and the right PPE. Everyone on site shares responsibility for safety."
+          },
+          {
+            "Section": "On the Job",
+            "Content": "Before opening any panel, an apprentice confirms the circuit is locked out, proves their tester on a known source, then verifies the equipment is dead. The paperwork — permits and checklists — is part of the job, not an extra."
+          }
+        ],
+        "Category": "Theory",
+        "Quiz": "Electrical safety regulations in BC: WorkSafeBC OHS Regulation, CSA Z462, de-energization requirements, absence-of-voltage verification and responsibilities on site."
+      },
+      {
+        "id": "B2",
+        "Title": "Describe Arc Flash and Shock Hazards",
+        "Summary": [
+          {
+            "Section": "Overview",
+            "Content": "Electric shock happens when current passes through the body; even small currents can be fatal. Arc flash is the explosive release of energy when a fault jumps through air — it can burn skin, ignite clothing and throw shrapnel in milliseconds."
+          },
+          {
+            "Section": "Key Points",
+            "Content": "Current as low as 50 mA can stop a heart. Arc flash severity is measured as incident energy (cal/cm²). Approach boundaries shrink as voltage rises. Labels on equipment state the hazard level and required PPE."
+          },
+          {
+            "Section": "On the Job",
+            "Content": "Reading the arc flash label before opening a switchboard tells you the boundary distances and the PPE category. If the label calls for gear you don't have, the work waits."
+          }
+        ],
+        "Category": "Theory",
+        "Quiz": "Shock and arc flash hazards: physiological effects of current, incident energy, approach boundaries and equipment labelling."
+      },
+      {
+        "id": "B3",
+        "Title": "Select and Use Personal Protective Equipment",
+        "Summary": [
+          {
+            "Section": "Overview",
+            "Content": "PPE is the last line of defence after elimination, substitution and engineering controls. Electrical work adds voltage-rated gloves, arc-rated clothing, Class E hard hats and safety glasses to the everyday kit."
+          },
+          {
+            "Section": "Key Points",
+            "Content": "Match PPE to the task and the hazard level. Inspect gloves before each use — air test them and check for damage. Arc-rated clothing must cover the whole body with no melting synthetics underneath."
+          },
+          {
+            "Section": "On the Job",
+            "Content": "An apprentice testing a live 347 V lighting circuit wears voltage-rated gloves with leather protectors, arc-rated clothing and a face shield — and checks each piece before putting it on."
+          }
+        ],
+        "Category": "Practical",
+        "Quiz": "Selecting and inspecting PPE for electrical work: voltage-rated gloves, arc-rated clothing, Class E head protection and pre-use inspection."
+      },
+      {
+        "id": "B4",
+        "Title": "Perform Lock-out and Tag-out Procedures",
+        "Summary": [
+          {
+            "Section": "Overview",
+            "Content": "Lock-out/tag-out (LOTO) physically prevents equipment from being re-energized while someone is working on it. Each worker applies a personal lock and tag to every energy-isolating device, and only that worker removes them."
+          },
+          {
+            "Section": "Key Points",
+            "Content": "Identify every energy source, not just electrical. Isolate, lock, tag, then try to start the equipment to prove isolation. Group lock boxes coordinate multiple trades. Never remove another worker's lock."
+          },
+          {
+            "Section": "On the Job",
+            "Content": "Before replacing a motor, the apprentice locks the disconnect, tags it with their name, presses the start button to confirm nothing runs, and only then opens the connection box."
+          }
+        ],
+        "Category": "Practical",
+        "Quiz": "Lock-out/tag-out: energy isolation, personal locks and tags, verification by attempted restart and multi-worker group lock procedures."
+      }
+    ],
+    "Line C": [
+      {
+        "id": "C1",
+        "Title": "Describe Electrical Test Instruments",
+        "Summary": [
+          {
+            "Section": "Overview",
+            "Content": "Test instruments turn invisible electrical quantities into readings you can act on. The trade relies on multimeters, clamp meters, megohmmeters, and non-contact voltage testers — each with a specific purpose and rating."
+          },
+          {
+            "Section": "Key Points",
+            "Content": "Meters carry CAT ratings (I–IV) matching where they may be used; higher CAT numbers withstand bigger transients. A clamp meter reads current without breaking the circuit. A megohmmeter tests insulation with a high test voltage."
+          },
+          {
+            "Section": "On the Job",
+            "Content": "Choosing a CAT III meter for panel work isn't optional — a lower-rated meter can fail violently on a supply-side transient. Instrument choice is a safety decision."
+          }
+        ],
+        "Category": "Theory",
+        "Quiz": "Test instruments: multimeter, clamp meter, megohmmeter and voltage testers; CAT ratings and choosing the right instrument for the environment."
+      },
+      {
+        "id": "C2",
+        "Title": "Use Hand and Power Tools",
+        "Summary": [
+          {
+            "Section": "Overview",
+            "Content": "An electrician's kit spans strippers, linesman pliers, screwdrivers and fish tapes through to hammer drills and band saws. Skill means picking the right tool, keeping it in shape and using it the way it was designed."
+          },
+          {
+            "Section": "Key Points",
+            "Content": "Inspect tools before use; damaged tools leave the job. Insulated tools protect only if their rating and condition are intact. Let the tool do the work — forcing it is how injuries happen."
+          },
+          {
+            "Section": "On the Job",
+            "Content": "Stripping #14 solid with the correct stripper notch leaves clean copper; using the wrong notch nicks the conductor and creates a future failure point at the termination."
+          }
+        ],
+        "Category": "Practical",
+        "Quiz": "Hand and power tools of the electrical trade: selection, inspection, insulated tool ratings and safe technique."
+      },
+      {
+        "id": "C3",
+        "Title": "Use a Digital Multimeter",
+        "Summary": [
+          {
+            "Section": "Overview",
+            "Content": "The digital multimeter (DMM) measures voltage, current and resistance. Reading it correctly — and proving it first — is one of the most-used skills in the trade."
+          },
+          {
+            "Section": "Key Points",
+            "Content": "Prove the meter on a known live source before and after testing for absence of voltage. Select the right function and range. Never measure resistance on a live circuit. Mind the lead sockets when switching to current."
+          },
+          {
+            "Section": "On the Job",
+            "Content": "Verifying a receptacle: prove the meter, test hot-to-neutral (120 V), hot-to-ground (120 V) and neutral-to-ground (near 0 V). Three readings tell the whole story of the connection."
+          }
+        ],
+        "Category": "Practical",
+        "Quiz": "Digital multimeter use: proving the tester, measuring voltage, current and resistance safely, and interpreting readings."
+      },
+      {
+        "id": "C4",
+        "Title": "Set Up Ladders and Access Equipment",
+        "Summary": [
+          {
+            "Section": "Overview",
+            "Content": "Much electrical work happens overhead. Ladders, scaffolds and lifts get you there — and set up wrong, they're one of the trade's biggest injury sources."
+          },
+          {
+            "Section": "Key Points",
+            "Content": "Set extension ladders at 4:1 (about 75°) and tie them off. Keep three points of contact. Only fibreglass ladders belong near electrical work. Inspect scaffolds and guardrails before every shift."
+          },
+          {
+            "Section": "On the Job",
+            "Content": "Running conduit at ceiling height from a baker's scaffold: wheels locked, platform pinned, guardrails up — the setup takes five minutes and removes the biggest risk of the task."
+          }
+        ],
+        "Category": "Practical",
+        "Quiz": "Access equipment: ladder angles and materials, three points of contact, scaffold inspection and safe work at height."
+      }
+    ],
+    "Line D": [
+      {
+        "id": "D1",
+        "Title": "Interpret Plans, Drawings and Specifications",
+        "Summary": [
+          {
+            "Section": "Overview",
+            "Content": "Construction documents describe the finished building: floor plans locate devices, single-line diagrams show the distribution path, schedules list equipment, and specifications define quality and methods."
+          },
+          {
+            "Section": "Key Points",
+            "Content": "Learn the standard electrical symbols. The single-line diagram is the system's story in one page. Specifications usually govern over drawings when they conflict — check the contract's order of precedence."
+          },
+          {
+            "Section": "On the Job",
+            "Content": "Laying out a floor's receptacles starts with the architectural plan, the electrical layout and the panel schedule side by side — the three must agree before the first box goes on the wall."
+          }
+        ],
+        "Category": "Theory",
+        "Quiz": "Reading construction documents: floor plans, single-line diagrams, schedules, specifications and the order of precedence between them."
+      },
+      {
+        "id": "D2",
+        "Title": "Describe Trade-Related Documentation",
+        "Summary": [
+          {
+            "Section": "Overview",
+            "Content": "Beyond drawings, a job runs on documents: permits, inspection reports, change orders, as-builts and the apprentice's own logbook recording hours toward certification."
+          },
+          {
+            "Section": "Key Points",
+            "Content": "Electrical work needs a permit and inspections at defined stages. Change orders capture scope changes in writing. As-built drawings record what was actually installed. Your logbook is the record SkilledTradesBC certifies against."
+          },
+          {
+            "Section": "On the Job",
+            "Content": "When a wall moves and circuits shift with it, the change order and the marked-up as-built are what keep the next electrician — maybe you, in two years — from hunting for phantom wiring."
+          }
+        ],
+        "Category": "Theory",
+        "Quiz": "Trade documentation: permits and inspections, change orders, as-built drawings and apprenticeship hour logging."
+      },
+      {
+        "id": "D3",
+        "Title": "Plan and Organize Job Tasks",
+        "Summary": [
+          {
+            "Section": "Overview",
+            "Content": "Planning turns drawings into a day's work: what gets installed first, what materials must be on hand, and how your work sequences with other trades."
+          },
+          {
+            "Section": "Key Points",
+            "Content": "Rough-in follows framing and precedes insulation and drywall — miss the window and the cost multiplies. Stage materials where the work happens. Coordinate with plumbing and HVAC before conflicts are built in."
+          },
+          {
+            "Section": "On the Job",
+            "Content": "Walking the floor each morning to confirm which areas are framed and which are being boarded tells you where your crew can actually work today — not where the schedule says you should be."
+          }
+        ],
+        "Category": "Practical",
+        "Quiz": "Task planning and sequencing: trade coordination, rough-in windows, material staging and daily planning."
+      },
+      {
+        "id": "D4",
+        "Title": "Prepare a Material Take-Off",
+        "Summary": [
+          {
+            "Section": "Overview",
+            "Content": "A material take-off converts drawings into a counted list of everything the job needs — devices, boxes, conductors, raceway and fittings — so material arrives before the crew does."
+          },
+          {
+            "Section": "Key Points",
+            "Content": "Count devices from the plans, measure runs for conductor and raceway lengths, and add a sensible waste factor. Group the list by installation phase so ordering matches the schedule."
+          },
+          {
+            "Section": "On the Job",
+            "Content": "Taking off a suite's wiring: count receptacles, switches and luminaires, measure home runs to the panel, convert to boxes of cable and bundles of conduit — then add 10% because walls are never as straight as drawings."
+          }
+        ],
+        "Category": "Practical",
+        "Quiz": "Material take-offs: counting devices, measuring runs, waste factors and phased ordering."
+      }
+    ],
+    "Line G": [
+      {
+        "id": "G1",
+        "Title": "Describe Effective Workplace Communication",
+        "Summary": [
+          {
+            "Section": "Overview",
+            "Content": "Construction runs on clear, brief and confirmed communication. Instructions, hazards and changes all move by voice, text and drawing markup — and every handoff is a chance for information to distort."
+          },
+          {
+            "Section": "Key Points",
+            "Content": "Confirm understanding by repeating instructions back. Use trade-standard terms, not slang, for critical items. Write down anything with numbers in it. Bad news travels best fast and factual."
+          },
+          {
+            "Section": "On the Job",
+            "Content": "A journeyperson calls out 'feed the ceiling boxes from circuit 12' — the apprentice repeats it back before touching a wire. That five-second habit catches misheard numbers before they become miswired circuits."
+          }
+        ],
+        "Category": "Theory",
+        "Quiz": "Workplace communication: confirming instructions, standard terminology, written records and reporting problems early."
+      },
+      {
+        "id": "G2",
+        "Title": "Describe the Mentoring Relationship",
+        "Summary": [
+          {
+            "Section": "Overview",
+            "Content": "Apprenticeship is structured mentoring: a journeyperson demonstrates, the apprentice practises under supervision, and responsibility grows with demonstrated skill."
+          },
+          {
+            "Section": "Key Points",
+            "Content": "Good mentors explain the why, not just the how. Good apprentices ask questions, accept feedback and show their work. Skills pass in both directions — new workers often carry new techniques and technology."
+          },
+          {
+            "Section": "On the Job",
+            "Content": "An apprentice who asks 'why bond the box here?' learns code intent, not just habit — and the journeyperson who explains it builds a coworker they can trust with the next panel."
+          }
+        ],
+        "Category": "Theory",
+        "Quiz": "The mentoring relationship: demonstration and practice, feedback, growing responsibility and two-way learning."
+      },
+      {
+        "id": "G3",
+        "Title": "Communicate on the Job Site",
+        "Summary": [
+          {
+            "Section": "Overview",
+            "Content": "Site communication is a practised skill: morning huddles, toolbox talks, hand signals around noise and equipment, and clean markup on drawings that others will read after you."
+          },
+          {
+            "Section": "Key Points",
+            "Content": "Attend and contribute to toolbox talks. Learn crane and equipment hand signals used on your site. Mark up drawings legibly and date your changes. Radio calls: identify, state, confirm."
+          },
+          {
+            "Section": "On the Job",
+            "Content": "When the lift operator can't hear over the generator, the standard hand signals are the only language on site — everyone on the crew has to speak them."
+          }
+        ],
+        "Category": "Practical",
+        "Quiz": "Practical site communication: toolbox talks, hand signals, drawing markup and radio discipline."
+      },
+      {
+        "id": "G4",
+        "Title": "Apply Mentoring Techniques",
+        "Summary": [
+          {
+            "Section": "Overview",
+            "Content": "Even a first-year passes skills on — to newer apprentices, helpers and sometimes other trades. Explaining a task clearly is also the best test of whether you truly understand it."
+          },
+          {
+            "Section": "Key Points",
+            "Content": "Demonstrate slowly, then watch them try. Correct the method, not the person. Break skills into steps small enough to succeed at. Praise in public, correct in private."
+          },
+          {
+            "Section": "On the Job",
+            "Content": "Showing a new helper how to prep cable ends: demonstrate one, coach one, watch one — then let them run the rest of the box while staying in reach."
+          }
+        ],
+        "Category": "Practical",
+        "Quiz": "Applying mentoring techniques: demonstrate-coach-watch, constructive correction and breaking skills into steps."
+      }
+    ],
+    "Line H": [
+      {
+        "id": "H1",
+        "Title": "Describe Consumer/Supply Service Requirements",
+        "Summary": [
+          {
+            "Section": "Overview",
+            "Content": "The consumer's service is everything that brings utility power to the building's main disconnect: the point of attachment, service conductors, mast or lateral, and the service box itself."
+          },
+          {
+            "Section": "Key Points",
+            "Content": "Services may be overhead (via a mast) or underground (a lateral). The CEC sets clearances over roofs, driveways and walkways. The service box must open all ungrounded conductors at once and be readily accessible."
+          },
+          {
+            "Section": "On the Job",
+            "Content": "Planning a 200 A residential service means checking the utility's point-of-attachment height, mast strength, conductor sizing and the clearance over the deck the drawings forgot about."
+          }
+        ],
+        "Category": "Theory",
+        "Quiz": "Consumer services: overhead vs underground supply, clearances, service conductor sizing and service box requirements."
+      },
+      {
+        "id": "H2",
+        "Title": "Describe Metering Equipment",
+        "Summary": [
+          {
+            "Section": "Overview",
+            "Content": "Metering measures the energy a customer uses. Residential services meter directly through a socket-mounted kilowatt-hour meter; larger services meter through instrument transformers."
+          },
+          {
+            "Section": "Key Points",
+            "Content": "The meter base is utility-sealed — only the utility breaks the seal. Meters record kilowatt-hours; demand meters also record peak draw. Smart meters report remotely and enable time-of-use billing."
+          },
+          {
+            "Section": "On the Job",
+            "Content": "Wiring a meter base: line side from the service head, load side to the service box, and the bonding intact — then it stays untouched until the utility installs and seals the meter."
+          }
+        ],
+        "Category": "Theory",
+        "Quiz": "Metering equipment: kWh meters, meter bases, utility seals, demand and smart metering."
+      },
+      {
+        "id": "H3",
+        "Title": "Install a Single-Phase Consumer Service",
+        "Summary": [
+          {
+            "Section": "Overview",
+            "Content": "Installing a 120/240 V single-phase service ties together mast, conductors, meter base and service box into the one assembly every other circuit in the building depends on."
+          },
+          {
+            "Section": "Key Points",
+            "Content": "Size service conductors to the calculated load. Maintain code clearances at the point of attachment. Drip loops keep water out; the mast flashing keeps the roof sealed. Torque service terminations to spec."
+          },
+          {
+            "Section": "On the Job",
+            "Content": "A service upgrade day is choreographed: utility disconnects, old equipment comes off, new mast and box go in, inspection happens, and the utility reconnects — all before dark."
+          }
+        ],
+        "Category": "Practical",
+        "Quiz": "Installing single-phase services: masts, drip loops, conductor sizing, terminations and inspection sequencing."
+      },
+      {
+        "id": "H4",
+        "Title": "Install Metering Equipment",
+        "Summary": [
+          {
+            "Section": "Overview",
+            "Content": "The meter base sits between the service conductors and the service box, and its installation is shared territory between electrician and utility — built by one, sealed and energized by the other."
+          },
+          {
+            "Section": "Key Points",
+            "Content": "Mount the base plumb at the utility's specified height. Line and load must land on the correct lugs — reversed metering is a real and expensive mistake. Leave the sealing to the utility."
+          },
+          {
+            "Section": "On the Job",
+            "Content": "Before calling for the meter, the apprentice re-checks lug torque and line/load orientation, because rework after the utility seals the base means another appointment and a cold house."
+          }
+        ],
+        "Category": "Practical",
+        "Quiz": "Installing meter bases: mounting requirements, line/load orientation, torque and utility coordination."
+      }
+    ],
+    "Line I": [
+      {
+        "id": "I1",
+        "Title": "Describe Overcurrent Protection Devices",
+        "Summary": [
+          {
+            "Section": "Overview",
+            "Content": "Overcurrent devices — fuses and circuit breakers — open a circuit when current exceeds safe limits, protecting conductors and equipment from overload and short-circuit damage."
+          },
+          {
+            "Section": "Key Points",
+            "Content": "Overload is too much current for too long; short circuit is a massive instantaneous fault. Devices carry a current rating, a voltage rating and an interrupting rating that must meet or exceed available fault current."
+          },
+          {
+            "Section": "On the Job",
+            "Content": "A 15 A breaker on 14 AWG copper is matched protection — swap in a 20 A breaker and the wire becomes the fuse. Ratings exist as a set, never individually."
+          }
+        ],
+        "Category": "Theory",
+        "Quiz": "Overcurrent protection: overload vs short circuit, fuses and breakers, current/voltage/interrupting ratings."
+      },
+      {
+        "id": "I2",
+        "Title": "Describe GFCI and AFCI Protection",
+        "Summary": [
+          {
+            "Section": "Overview",
+            "Content": "GFCIs protect people: they compare current out and back, and trip in milliseconds when even 5 mA leaks through an unintended path — like a person. AFCIs protect property by recognizing the signature of dangerous arcing."
+          },
+          {
+            "Section": "Key Points",
+            "Content": "GFCI: 5 mA imbalance, Class A, required near water. AFCI: detects series and parallel arcs, required in dwelling living areas. Both come as breakers or receptacles, and both have test buttons that should actually be used."
+          },
+          {
+            "Section": "On the Job",
+            "Content": "A hair dryer dropped in a sink doesn't blow the breaker — the GFCI's 5 mA trip is what stands between that moment and electrocution. Code placement rules follow the water."
+          }
+        ],
+        "Category": "Theory",
+        "Quiz": "GFCI and AFCI protection: trip principles, thresholds, code locations and testing."
+      },
+      {
+        "id": "I3",
+        "Title": "Install Circuit Breakers and Fuses",
+        "Summary": [
+          {
+            "Section": "Overview",
+            "Content": "Installing protection is precision work: the device rating must match conductor ampacity, the panel listing must accept the breaker model, and terminations must be torqued to spec."
+          },
+          {
+            "Section": "Key Points",
+            "Content": "Only install breakers listed for the panel. Match rating to the smallest conductor protected. Torque matters — loose terminations heat and fail. Fuse holders: line side to the fixed contact so removal is dead."
+          },
+          {
+            "Section": "On the Job",
+            "Content": "Populating a new panel: schedule in hand, breakers matched to each circuit's conductor size, torque screwdriver on every lug, and labels written before the cover goes on."
+          }
+        ],
+        "Category": "Practical",
+        "Quiz": "Installing breakers and fuses: panel listing, rating matching, torque and labelling."
+      },
+      {
+        "id": "I4",
+        "Title": "Install GFCI and AFCI Devices",
+        "Summary": [
+          {
+            "Section": "Overview",
+            "Content": "GFCI and AFCI devices install like their ordinary cousins but add line/load discipline: wired wrong, they either don't protect or trip constantly."
+          },
+          {
+            "Section": "Key Points",
+            "Content": "Line and load terminals are not interchangeable. Downstream protection flows through the load terminals. Shared neutrals break AFCI/GFCI breakers — each needs its own neutral back to the device. Test after installing."
+          },
+          {
+            "Section": "On the Job",
+            "Content": "A bathroom string: one GFCI receptacle at the first outlet protects everything downstream through its load terminals — and the sticker kit tells the next person which outlets those are."
+          }
+        ],
+        "Category": "Practical",
+        "Quiz": "Installing GFCI/AFCI: line vs load, downstream protection, neutral discipline and functional testing."
+      }
+    ],
+    "Line J": [
+      {
+        "id": "J1",
+        "Title": "Describe Low Voltage Distribution Equipment",
+        "Summary": [
+          {
+            "Section": "Overview",
+            "Content": "Distribution equipment moves power from the service to the loads: panelboards split it into branch circuits, splitters divide large feeds, and disconnects give each portion a working isolation point."
+          },
+          {
+            "Section": "Key Points",
+            "Content": "Panelboards hold branch and feeder breakers on energized busbars. Splitters house tap connections for multiple disconnects. Everything carries voltage, current and fault ratings that must match the system."
+          },
+          {
+            "Section": "On the Job",
+            "Content": "Tracing a building's power: service box → splitter → three disconnects → three panels. Drawing that path from the equipment in front of you is the first step of every troubleshooting call."
+          }
+        ],
+        "Category": "Theory",
+        "Quiz": "Distribution equipment: panelboards, splitters, disconnects and their ratings."
+      },
+      {
+        "id": "J2",
+        "Title": "Interpret Panelboard Schedules",
+        "Summary": [
+          {
+            "Section": "Overview",
+            "Content": "The panel schedule is the map of a panelboard: every breaker's rating, its circuit number and what it feeds. An accurate schedule is the difference between isolating one circuit and guessing at six."
+          },
+          {
+            "Section": "Key Points",
+            "Content": "Odd circuit numbers stack on one side, even on the other, alternating busbars top to bottom. Balanced loading across phases reduces neutral current. Blank means spare — verify before trusting."
+          },
+          {
+            "Section": "On the Job",
+            "Content": "Before pulling a permit for added circuits, the schedule shows whether the panel has physical space and spare capacity — or whether the quote just grew a sub-panel."
+          }
+        ],
+        "Category": "Theory",
+        "Quiz": "Panel schedules: circuit numbering, busbar alternation, load balancing and capacity checks."
+      },
+      {
+        "id": "J3",
+        "Title": "Install Panelboards and Splitters",
+        "Summary": [
+          {
+            "Section": "Overview",
+            "Content": "Mounting distribution equipment sets up everything that follows: level, accessible, code-clear of obstructions, and connected with properly sized and torqued conductors."
+          },
+          {
+            "Section": "Key Points",
+            "Content": "Maintain working space clearances in front of equipment. Height limits put the top breaker within reach. Knockouts get connectors, unused openings get plugs. Torque bus and lug connections to the label."
+          },
+          {
+            "Section": "On the Job",
+            "Content": "Setting a 42-circuit panel: plumb and level so covers fit, working space verified before mounting, feeder landed and torqued, and the torque values written on the inspection card."
+          }
+        ],
+        "Category": "Practical",
+        "Quiz": "Installing panelboards and splitters: working space, mounting, terminations and torque."
+      },
+      {
+        "id": "J4",
+        "Title": "Connect Feeders and Sub-Panels",
+        "Summary": [
+          {
+            "Section": "Overview",
+            "Content": "Sub-panels extend distribution to garages, suites and outbuildings. The feeder that supplies them must be sized, protected and — critically — grounded correctly."
+          },
+          {
+            "Section": "Key Points",
+            "Content": "In a sub-panel, neutrals and grounds separate: the neutral floats on an isolated bar, bonding lands on the enclosure. The feeder's overcurrent device lives at its source end. Four wires to a detached building, per current code."
+          },
+          {
+            "Section": "On the Job",
+            "Content": "Wiring a garage sub-panel: four-conductor feeder, neutral bar isolation kit installed, bonding screw removed — the three details inspectors check first, because they're the three most often wrong."
+          }
+        ],
+        "Category": "Practical",
+        "Quiz": "Feeders and sub-panels: neutral/ground separation, feeder protection and detached building requirements."
+      }
+    ],
+    "Line L": [
+      {
+        "id": "L1",
+        "Title": "Describe Grounding and Bonding Principles",
+        "Summary": [
+          {
+            "Section": "Overview",
+            "Content": "Grounding connects the electrical system to earth, stabilizing its voltage; bonding connects all exposed metal parts together so a fault can't make one of them dangerous to touch."
+          },
+          {
+            "Section": "Key Points",
+            "Content": "Grounding is for the system; bonding is for people. A fault on a bonded system has a low-impedance path that trips the overcurrent device fast. Earth itself is a poor conductor — bonding, not dirt, clears faults."
+          },
+          {
+            "Section": "On the Job",
+            "Content": "Why does the metal box get a bond wire? So that if a hot conductor touches it, the breaker trips instantly instead of the box waiting silently at 120 V for someone's hand."
+          }
+        ],
+        "Category": "Theory",
+        "Quiz": "Grounding vs bonding: system grounding, fault current paths and why bonding protects people."
+      },
+      {
+        "id": "L2",
+        "Title": "Describe Ground Fault Detection",
+        "Summary": [
+          {
+            "Section": "Overview",
+            "Content": "On systems that operate ungrounded — some industrial plants and marinas — ground fault detection signals the first fault so it can be found and fixed before a second fault causes a short circuit or outage."
+          },
+          {
+            "Section": "Key Points",
+            "Content": "The first ground fault on an ungrounded system doesn't trip anything — it just re-references the system. Detection lamps or relays announce it. The second fault, without repair, is a phase-to-phase short."
+          },
+          {
+            "Section": "On the Job",
+            "Content": "Three detection lamps glowing evenly means a healthy system; one dark lamp points at the faulted phase. Reading them is the plant electrician's morning glance."
+          }
+        ],
+        "Category": "Theory",
+        "Quiz": "Ground fault detection on ungrounded systems: first-fault behaviour, indicator lamps and relays."
+      },
+      {
+        "id": "L3",
+        "Title": "Install System Grounding",
+        "Summary": [
+          {
+            "Section": "Overview",
+            "Content": "System grounding starts at the grounding electrode: rods, plates or a concrete-encased electrode connected by an unbroken grounding conductor to the service equipment."
+          },
+          {
+            "Section": "Key Points",
+            "Content": "Ground rods drive full depth; pairs space at least 3 m apart. The grounding conductor runs unspliced and protected. Connections use listed clamps — accessible ones stay accessible."
+          },
+          {
+            "Section": "On the Job",
+            "Content": "Two rods, ten feet of buried #6 to the service, clamps rated for direct burial: twenty minutes of work that every circuit in the house silently depends on."
+          }
+        ],
+        "Category": "Practical",
+        "Quiz": "Installing grounding electrodes: rods and spacing, grounding conductor rules and listed connections."
+      },
+      {
+        "id": "L4",
+        "Title": "Install Bonding Conductors",
+        "Summary": [
+          {
+            "Section": "Overview",
+            "Content": "Bonding ties together boxes, raceways, water pipes, gas piping and equipment enclosures so everything a person can touch stays at the same potential during a fault."
+          },
+          {
+            "Section": "Key Points",
+            "Content": "Size bonding conductors from the code tables based on the overcurrent device. Metal raceway can serve as the bond if its joints are made up tight. Water meters get jumpers; isolated sections get connected."
+          },
+          {
+            "Section": "On the Job",
+            "Content": "Bonding the water service: clamp upstream of the meter, jumper across it, conductor sized to the table — because a corroded meter gasket shouldn't decide whether a fault clears."
+          }
+        ],
+        "Category": "Practical",
+        "Quiz": "Installing bonding: conductor sizing, raceway continuity, water and gas piping bonds."
+      }
+    ],
+    "Line Q": [
+      {
+        "id": "Q1",
+        "Title": "Describe Raceway and Cable Types",
+        "Summary": [
+          {
+            "Section": "Overview",
+            "Content": "Conductors travel in raceways (EMT, rigid, PVC, flexible conduits) or as cables (NMD90, armoured AC90/TECK, underground types) — each with an environment it's designed for and rules that follow."
+          },
+          {
+            "Section": "Key Points",
+            "Content": "EMT for dry interiors; rigid where damage threatens; PVC underground and in corrosive areas; NMD90 in dry residential walls; TECK where things get industrial. Fill tables limit how many conductors share a raceway."
+          },
+          {
+            "Section": "On the Job",
+            "Content": "Choosing between EMT and TECK for a parkade run comes down to environment: moisture, mechanical damage and what the spec already decided. The catalogue is big; the drawings narrow it."
+          }
+        ],
+        "Category": "Theory",
+        "Quiz": "Raceway and cable types: EMT, rigid, PVC, NMD90, AC90, TECK and where each belongs."
+      },
+      {
+        "id": "Q2",
+        "Title": "Bend and Install Conduit",
+        "Summary": [
+          {
+            "Section": "Overview",
+            "Content": "Conduit bending is the trade's signature craft: 90s, offsets, saddles and kicks measured and bent so runs land square, parallel and within the 360° bend limit between pulls."
+          },
+          {
+            "Section": "Key Points",
+            "Content": "Learn your bender's take-up and deduct. Offsets use paired bends and multiplier tables. Total bends between pull points stay at or under 360°. Support spacing and strap requirements come from code tables."
+          },
+          {
+            "Section": "On the Job",
+            "Content": "A clean rack of parallel offsets around a beam is the difference between a journeyperson's run and a fight with the wire during every future pull."
+          }
+        ],
+        "Category": "Practical",
+        "Quiz": "Conduit bending: 90s, offsets, saddles, the 360-degree rule and support spacing."
+      },
+      {
+        "id": "Q3",
+        "Title": "Pull and Terminate Cables",
+        "Summary": [
+          {
+            "Section": "Overview",
+            "Content": "Getting conductors through raceway without damage takes planning: swab the run, use pulling compound, respect maximum pulling tension and leave enough tail for terminations."
+          },
+          {
+            "Section": "Key Points",
+            "Content": "Pull together whatever shares the raceway — never add to an occupied conduit. Lubricate long or bendy pulls. Support cable trays and secure cables at code intervals. Label both ends before walking away."
+          },
+          {
+            "Section": "On the Job",
+            "Content": "A four-hundred-foot feeder pull: fish line, then rope, then compound-slicked conductors with two people feeding and one on the tugger — and tails labelled before lunch."
+          }
+        ],
+        "Category": "Practical",
+        "Quiz": "Cable pulling: fill and tension limits, lubrication, supports and labelling."
+      },
+      {
+        "id": "Q4",
+        "Title": "Install Boxes and Enclosures",
+        "Summary": [
+          {
+            "Section": "Overview",
+            "Content": "Every splice, device and termination lives in a box or enclosure sized for its contents, anchored to structure and matched to its environment."
+          },
+          {
+            "Section": "Key Points",
+            "Content": "Box fill is calculated by conductor count and size — crowd a box and code is failed and splices suffer. Weatherproof boxes and covers guard wet locations. Boxes stay accessible; burying one behind drywall is a code violation with a long memory."
+          },
+          {
+            "Section": "On the Job",
+            "Content": "Roughing in a kitchen: deep boxes where three cables meet, vapour hats on outside walls, and every box flush to the coming drywall line — measured, not guessed."
+          }
+        ],
+        "Category": "Practical",
+        "Quiz": "Boxes and enclosures: fill calculations, environmental ratings, accessibility and mounting."
+      }
+    ],
+    "Line R": [
+      {
+        "id": "R1",
+        "Title": "Describe Branch Circuit Requirements",
+        "Summary": [
+          {
+            "Section": "Overview",
+            "Content": "Branch circuits are the final run from the last overcurrent device to the outlets. The CEC prescribes their conductor sizes, outlet counts and the dedicated circuits certain loads demand."
+          },
+          {
+            "Section": "Key Points",
+            "Content": "15 A circuits use 14 AWG copper and carry up to 12 outlets. Kitchens, bathrooms, laundry and fridges get dedicated treatment. Receptacle spacing rules ensure no point along a wall is far from an outlet."
+          },
+          {
+            "Section": "On the Job",
+            "Content": "Circuiting a bedroom floor plan: count outlets toward the 12 limit, keep lighting and receptacles sensibly split, and give the future window-AC receptacle its own run now, not later."
+          }
+        ],
+        "Category": "Theory",
+        "Quiz": "Branch circuits: conductor sizing, outlet limits, dedicated circuits and receptacle spacing."
+      },
+      {
+        "id": "R2",
+        "Title": "Describe Switching Arrangements",
+        "Summary": [
+          {
+            "Section": "Overview",
+            "Content": "Switching schemes range from a single-pole controlling one light to 3-way and 4-way systems controlling loads from many points, plus dimmers and the smart controls layered on top."
+          },
+          {
+            "Section": "Key Points",
+            "Content": "Single-pole: two terminals, one location. 3-way: three terminals, two locations, travellers between. 4-way: sits between 3-ways to add locations without limit. Dimmers must match their load type."
+          },
+          {
+            "Section": "On the Job",
+            "Content": "A hallway lit from both ends is the classic 3-way; add a mid-hall entry and a 4-way drops between them. The traveller pair is the thread through all of it."
+          }
+        ],
+        "Category": "Theory",
+        "Quiz": "Switching: single-pole, 3-way and 4-way circuits, travellers and dimmer compatibility."
+      },
+      {
+        "id": "R3",
+        "Title": "Install Receptacle Circuits",
+        "Summary": [
+          {
+            "Section": "Overview",
+            "Content": "Receptacle installation is high-volume, high-visibility work: correctly polarized, solidly terminated, at consistent heights, on circuits that match the plans."
+          },
+          {
+            "Section": "Key Points",
+            "Content": "Brass terminal takes the hot, silver takes the neutral, green takes the bond. Loop conductors clockwise under screws, or use the clamp plates — never rely on push-in backstabs for lasting connections. Tamper-resistant receptacles are the residential default."
+          },
+          {
+            "Section": "On the Job",
+            "Content": "Trimming out a floor: device heights uniform, faces plumb, terminations torqued snug, then every receptacle verified with a plug-in tester before the plates go on."
+          }
+        ],
+        "Category": "Practical",
+        "Quiz": "Installing receptacles: polarity, termination methods, tamper resistance and verification."
+      },
+      {
+        "id": "R4",
+        "Title": "Install Lighting and Switching Circuits",
+        "Summary": [
+          {
+            "Section": "Overview",
+            "Content": "Lighting circuits combine boxes, switching, luminaires and often occupancy controls — wired so switching interrupts the hot, never the neutral."
+          },
+          {
+            "Section": "Key Points",
+            "Content": "The switched conductor is always the ungrounded one. Modern code wants a neutral available in switch boxes for smart controls. Support luminaires from structure, not from the box, when they're heavy."
+          },
+          {
+            "Section": "On the Job",
+            "Content": "Wiring a 3-way stairwell with LED fixtures: power to the first switch, travellers up the wall, switched hot to the fixture, and neutrals joined through — mapped on paper before the first cable is cut."
+          }
+        ],
+        "Category": "Practical",
+        "Quiz": "Lighting circuits: switching the hot, neutrals at switch points, fixture support and 3-way wiring."
+      }
+    ],
+    "Line V": [
+      {
+        "id": "V1",
+        "Title": "Describe Motor Starter Types",
+        "Summary": [
+          {
+            "Section": "Overview",
+            "Content": "Motor starters connect motors to power safely: manual starters for small loads, magnetic starters for remote and automatic control, and reduced-voltage or electronic starters where inrush must be tamed."
+          },
+          {
+            "Section": "Key Points",
+            "Content": "A magnetic starter is a contactor plus overload protection. Across-the-line starting is simple but hits the system with inrush. Soft starters and VFDs ramp voltage or frequency to ease big motors in."
+          },
+          {
+            "Section": "On the Job",
+            "Content": "The compressor that dims the lights on start-up is a candidate for a soft starter — the fix lives in the starter choice, not the motor."
+          }
+        ],
+        "Category": "Theory",
+        "Quiz": "Motor starters: manual vs magnetic, across-the-line starting, soft starters and VFDs."
+      },
+      {
+        "id": "V2",
+        "Title": "Describe Overload Protection",
+        "Summary": [
+          {
+            "Section": "Overview",
+            "Content": "Motors draw dangerous heat-building current when overloaded or stalled — overload relays sense sustained excess current and disconnect the motor before the windings cook."
+          },
+          {
+            "Section": "Key Points",
+            "Content": "Overload relays are sized to the motor's nameplate full-load amps and service factor. They ride through brief inrush but trip on sustained overload. Breakers protect the wiring; overloads protect the motor."
+          },
+          {
+            "Section": "On the Job",
+            "Content": "A conveyor jamming daily doesn't need a bigger overload — it needs the jam fixed. The relay tripping is the motor being saved, not the problem itself."
+          }
+        ],
+        "Category": "Theory",
+        "Quiz": "Motor overload protection: nameplate sizing, trip classes and the breaker/overload division of labour."
+      },
+      {
+        "id": "V3",
+        "Title": "Install Magnetic Starters",
+        "Summary": [
+          {
+            "Section": "Overview",
+            "Content": "Installing a magnetic starter means mounting, powering and protecting it: line and load connections, control wiring to the coil, and overloads dialled to the motor's nameplate."
+          },
+          {
+            "Section": "Key Points",
+            "Content": "Match the starter's NEMA/IEC size to the motor. Set overload dials to nameplate FLA. Keep power and control wiring separated and labelled. Verify rotation on first start — three-phase motors don't care which way you expected."
+          },
+          {
+            "Section": "On the Job",
+            "Content": "Commissioning a fan starter: overloads set, coil voltage confirmed, bump test for rotation, then the run test with clamp meter readings logged against nameplate."
+          }
+        ],
+        "Category": "Practical",
+        "Quiz": "Installing magnetic starters: sizing, overload settings, control wiring and rotation checks."
+      },
+      {
+        "id": "V4",
+        "Title": "Wire a Start/Stop Control Circuit",
+        "Summary": [
+          {
+            "Section": "Overview",
+            "Content": "The three-wire start/stop circuit is the foundation of motor control: a momentary start button, a momentary stop, and a seal-in contact that keeps the motor running until told otherwise."
+          },
+          {
+            "Section": "Key Points",
+            "Content": "The seal-in (holding) contact parallels the start button. The stop button and every safety interlock wire in series ahead of it. Loss of power drops the coil — three-wire control restarts only by command, which is the safety point."
+          },
+          {
+            "Section": "On the Job",
+            "Content": "Wiring the classic circuit on the bench: press start, coil pulls in, seal-in holds, press stop, everything drops — then trace why with the print, until the logic is yours for life."
+          }
+        ],
+        "Category": "Practical",
+        "Quiz": "Three-wire control: start/stop buttons, seal-in contacts, series interlocks and restart behaviour."
       }
     ]
   }

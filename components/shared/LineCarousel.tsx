@@ -17,7 +17,10 @@ export const LineCarousel: React.FC<LineCarouselProps> = ({
 }) => {
   const [currentIndex, setCurrentIndex] = useState(lines.length - 2);
   const scrollViewRef = useRef<ScrollView>(null);
-  
+  // a horizontal swipe over the circles steps the carousel like the arrows
+  const touchStartX = useRef<number | null>(null);
+  const SWIPE_THRESHOLD = 35;
+
   const itemsPerPage = 5;
   
   // Get visible lines with infinite loop logic
@@ -47,10 +50,30 @@ export const LineCarousel: React.FC<LineCarouselProps> = ({
   };
 
   const visibleLines = getVisibleLines();
-  
+
+  const swipeStart = (e: any) => {
+    touchStartX.current =
+      e.nativeEvent.pageX ?? e.nativeEvent.changedTouches?.[0]?.pageX ?? null;
+  };
+  const swipeEnd = (e: any) => {
+    const start = touchStartX.current;
+    touchStartX.current = null;
+    if (start == null) return;
+    const end =
+      e.nativeEvent.pageX ?? e.nativeEvent.changedTouches?.[0]?.pageX;
+    if (end == null) return;
+    const dx = end - start;
+    if (dx <= -SWIPE_THRESHOLD) handleNext();
+    else if (dx >= SWIPE_THRESHOLD) handlePrev();
+  };
+
   return (
     <View style={styles.container}>
-      <View style={styles.lineRow}>
+      <View
+        style={styles.lineRow}
+        onTouchStart={swipeStart}
+        onTouchEnd={swipeEnd}
+      >
         {visibleLines.map((line, index) => {
           const isSelected = index === 2; // Middle item is always selected
           return (
@@ -103,6 +126,8 @@ export const LineCarousel: React.FC<LineCarouselProps> = ({
         <TouchableOpacity 
           style={styles.arrowButton}
           onPress={handlePrev}
+          accessibilityRole="button"
+          accessibilityLabel="Previous line"
         >
           <MaterialCommunityIcons 
             name="chevron-left" 
@@ -113,6 +138,8 @@ export const LineCarousel: React.FC<LineCarouselProps> = ({
         <TouchableOpacity 
           style={styles.arrowButton}
           onPress={handleNext}
+          accessibilityRole="button"
+          accessibilityLabel="Next line"
         >
           <MaterialCommunityIcons 
             name="chevron-right" 

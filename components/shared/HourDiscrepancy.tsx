@@ -37,10 +37,10 @@ export const HourDiscrepancy: React.FC<HourDiscrepancyProps> = ({
     />
   );
 
-  // Sort items: SkilledTradedBC first, Paystub second
+  // Sort items: SkilledTradesBC first, Paystub second
   const sortedItems = [...items].sort((a, b) => {
-    if (a.title === 'SkilledTradedBC') return -1;
-    if (b.title === 'SkilledTradedBC') return 1;
+    if (a.title === 'SkilledTradesBC') return -1;
+    if (b.title === 'SkilledTradesBC') return 1;
     if (a.title === 'Paystub') return 1;
     if (b.title === 'Paystub') return -1;
     return 0;

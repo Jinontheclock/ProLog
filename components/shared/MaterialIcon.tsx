@@ -5,6 +5,7 @@ import { StyleProp, TextStyle } from 'react-native';
 // Icon name mapping from image names to Material Icons
 export const ICON_NAMES = {
   // Navigation icons
+  'open_in_new': 'open-in-new',
   'chevron_right': 'chevron-right',
   'chevron_right1': 'chevron-right',
   'arrow_forward': 'arrow-forward',
@@ -82,6 +83,17 @@ export const ICON_NAMES = {
   'icon-search': 'search',
   'house': 'house',
   'icon-house': 'house',
+
+  // Settings screen icons
+  'person': 'person',
+  'edit': 'edit',
+  'language': 'language',
+  'record_voice_over': 'record-voice-over',
+  'animation': 'animation',
+  'format_size': 'format-size',
+  'mail_outline': 'mail-outline',
+  'privacy_tip': 'privacy-tip',
+  'logout': 'logout',
 } as const;
 
 interface MaterialIconProps {

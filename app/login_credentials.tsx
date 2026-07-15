@@ -59,7 +59,7 @@ export default function LoginCredentialsScreen() {
     <SafeAreaView style={[CommonStyles.container]}>
       {/* Header */}
       <View style={styles.header}>
-        <TouchableOpacity style={styles.backButton} onPress={handleBackPress}>
+        <TouchableOpacity style={styles.backButton} onPress={handleBackPress} accessibilityRole="button" accessibilityLabel="Go back">
           <MaterialIcon
             name="icon-arrow-back"
             size={24}

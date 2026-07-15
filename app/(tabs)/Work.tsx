@@ -257,14 +257,24 @@ export default function WorkScreen() {
 
             {/* Discrepancy Tracking */}
             <View style={styles.sectionHeader}>
-              <TouchableOpacity onPress={handleDemoNotification}>
-                <Text style={styles.sectionTitle}>Discrepancy Tracking</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => setShowDiscrepancyInfoModal(true)}
-              >
-                <MaterialIcon name="info" size={20} color="#999" />
-              </TouchableOpacity>
+              <Text style={styles.sectionTitle}>Discrepancy Tracking</Text>
+              <View style={styles.sectionHeaderIcons}>
+                {/* Demo: plays the paystub push-notification (sound + popup) */}
+                <TouchableOpacity onPress={handleDemoNotification} accessibilityRole="button" accessibilityLabel="Play notification demo">
+                  <MaterialIcon
+                    name="icon-bell"
+                    size={20}
+                    color={Colors.orange[400]}
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => setShowDiscrepancyInfoModal(true)}
+                  accessibilityRole="button"
+                  accessibilityLabel="About discrepancy tracking"
+                >
+                  <MaterialIcon name="info" size={20} color={Colors.grey[400]} />
+                </TouchableOpacity>
+              </View>
             </View>
 
             <HourDiscrepancy
@@ -280,7 +290,7 @@ export default function WorkScreen() {
                   ),
                 },
                 {
-                  title: "SkilledTradedBC",
+                  title: "SkilledTradesBC",
                   hours: getCurrentData(
                     workPageData.discrepancyTracking.skilledTradeBCHours
                   ),
@@ -401,10 +411,10 @@ export default function WorkScreen() {
               text="View All Paystubs"
               variant="light"
               customStyle={{
-                width: 388,
                 height: 42,
                 borderRadius: 30,
-                alignSelf: "center",
+                alignSelf: "stretch",
+                marginHorizontal: 20,
               }}
               onPress={() => router.push("/paystubs/PaystubList")}
             />
@@ -425,52 +435,22 @@ export default function WorkScreen() {
               progressImage={require("@/assets/images/Group 46.png")}
             />
 
-            {/* Line Completion */}
+            {/* Line Completion — the Level 1 lines from the program outline */}
             <CompletedLines
               title="Line Completion"
               lines={[
-                {
-                  name: "Line A",
-                  current: 4,
-                  total: 5,
-                  isCompleted: false,
-                },
-                {
-                  name: "Line B",
-                  current: 0,
-                  total: 3,
-                  isCompleted: false,
-                },
-                {
-                  name: "Line C",
-                  current: 1,
-                  total: 2,
-                  isCompleted: false,
-                },
-                {
-                  name: "Line D",
-                  current: 3,
-                  total: 6,
-                  isCompleted: false,
-                },
-                {
-                  name: "Line F",
-                  current: 0,
-                  total: 8,
-                  isCompleted: false,
-                },
-                {
-                  name: "Line G",
-                  current: 0,
-                  total: 10,
-                  isCompleted: false,
-                },
-                {
-                  name: "Line H",
-                  current: 0,
-                  total: 10,
-                  isCompleted: false,
-                },
+                { name: "Line A", current: 22, total: 22, isCompleted: true },
+                { name: "Line B", current: 4, total: 4, isCompleted: true },
+                { name: "Line C", current: 3, total: 4, isCompleted: false },
+                { name: "Line D", current: 2, total: 4, isCompleted: false },
+                { name: "Line G", current: 4, total: 4, isCompleted: true },
+                { name: "Line H", current: 1, total: 4, isCompleted: false },
+                { name: "Line I", current: 2, total: 4, isCompleted: false },
+                { name: "Line J", current: 0, total: 4, isCompleted: false },
+                { name: "Line L", current: 0, total: 4, isCompleted: false },
+                { name: "Line Q", current: 3, total: 4, isCompleted: false },
+                { name: "Line R", current: 1, total: 4, isCompleted: false },
+                { name: "Line V", current: 0, total: 4, isCompleted: false },
               ]}
             />
 
@@ -485,7 +465,7 @@ export default function WorkScreen() {
                 alignSelf: "center",
                 width: 300,
               }}
-              onPress={() => console.log("View Checklist pressed")}
+              onPress={() => router.push("/(tabs)/My_Skills")}
             />
           </>
         )}
@@ -497,19 +477,27 @@ export default function WorkScreen() {
               supportItems={[
                 {
                   title: "Canada\nApprentice Loan",
-                  description: "Interest-free loans for each periodof technical training",
+                  description: "Interest-free loans for each period of technical training",
+                  url: "https://www.canada.ca/en/services/jobs/training/support-skilled-trades-apprentices/loan.html",
+                  site: "Canada.ca",
                 },
                 {
                   title: "WorkBC\nApprentice Services",
                   description: "Financial support for travel, childcare and relocation",
+                  url: "https://www.workbc.ca/discover-employment-services/apprentice-services",
+                  site: "WorkBC",
                 },
                 {
                   title: "Tradesperson's\nTool Deduction",
                   description: "Financial support for tradespeople to cover tool costs",
+                  url: "https://www.canada.ca/en/revenue-agency/services/tax/individuals/topics/about-your-tax-return/tax-return/completing-a-tax-return/deductions-credits-expenses/line-22900-other-employment-expenses/employed-tradespersons-including-apprentice-mechanics.html",
+                  site: "Canada.ca (CRA)",
                 },
                 {
                   title: "Canada\nTraining Credit",
                   description: "Claim a tax credit for tuition and exam fees",
+                  url: "https://www.canada.ca/en/revenue-agency/services/child-family-benefits/canada-training-credit.html",
+                  site: "Canada.ca (CRA)",
                 },
               ]}
             />
@@ -522,8 +510,10 @@ export default function WorkScreen() {
                 </Text>
                 <TouchableOpacity
                   onPress={() => setShowPotentialExpensesInfoModal(true)}
+                  accessibilityRole="button"
+                  accessibilityLabel="About potential expenses"
                 >
-                  <MaterialIcon name="info" size={20} color="#999" />
+                  <MaterialIcon name="info" size={20} color={Colors.grey[400]} />
                 </TouchableOpacity>
               </View>
               <Text style={styles.sectionSubtitleNoMargin}>
@@ -742,6 +732,11 @@ const styles = StyleSheet.create({
     marginBottom: 2,
     marginHorizontal: 24,
   },
+  sectionHeaderIcons: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+  },
   financeHeaderContainer: {
     marginHorizontal: 24,
     marginTop: 8,
@@ -893,7 +888,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   skeletonText: {
-    backgroundColor: "#E5E7EB",
+    backgroundColor: Colors.grey[100],
     borderRadius: 4,
     opacity: 0.6,
   },

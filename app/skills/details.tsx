@@ -66,11 +66,11 @@ export default function SkillsDetailsScreen() {
   useEffect(() => {
     const loadData = async () => {
       if (competencyId) {
-        // Find the competency in the JSON data
-        const lineAData = skillsData["level 1"]["Line A"];
-        const foundCompetency = lineAData.find(
-          (item) => item.id === competencyId
-        );
+        // Find the competency anywhere in the level (all lines)
+        const levelData = skillsData["level 1"] as Record<string, CompetencyData[]>;
+        const foundCompetency = Object.values(levelData)
+          .flat()
+          .find((item) => item.id === competencyId);
 
         if (foundCompetency) {
           setCompetencyData(foundCompetency as CompetencyData);
@@ -175,7 +175,7 @@ export default function SkillsDetailsScreen() {
           {/* Header with DetailsHeading Component */}
           <DetailsHeading
             onBack={() => router.back()}
-            lineLabel="Line A"
+            lineLabel={`Line ${competencyData.id.replace(/[0-9]+$/, "")}`}
             title={competencyData.Title}
             tag={competencyData.Category}
           />

@@ -4,7 +4,7 @@ import { Typography } from "@/constants";
 import { Colors } from "@/constants/colors";
 import { CommonStyles } from "@/lib/common-styles";
 import { router } from "expo-router";
-import React from "react";
+import React, { useEffect } from "react";
 import {
     Image,
     ScrollView,
@@ -24,6 +24,19 @@ export default function LoadingExamScreen() {
     router.back();
   };
 
+  // Once the exam is "compiled", move on to the exam itself — a mixed
+  // question set covering all lines in the current level. replace() so
+  // backing out of the exam doesn't land on this loading screen again.
+  useEffect(() => {
+    const t = setTimeout(() => {
+      router.replace({
+        pathname: "/skills/quiz",
+        params: { skillId: "EXAM", content: "level-exam" },
+      });
+    }, 2600);
+    return () => clearTimeout(t);
+  }, []);
+
   return (
     <SafeAreaView style={CommonStyles.container}>
       <Image
@@ -39,7 +52,7 @@ export default function LoadingExamScreen() {
       >
         {/* Header */}
         <View style={styles.header}>
-          <TouchableOpacity style={styles.backButton} onPress={handleBackPress}>
+          <TouchableOpacity style={styles.backButton} onPress={handleBackPress} accessibilityRole="button" accessibilityLabel="Go back">
             <MaterialIcon
               name="icon-arrow-back"
               size={24}

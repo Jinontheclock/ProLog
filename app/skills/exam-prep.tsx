@@ -1,3 +1,4 @@
+import { InformationalMessage } from "@/components/shared/InformationalMessage";
 import MaterialIcon from "@/components/shared/MaterialIcon";
 import { Colors } from "@/constants/colors";
 import { Typography } from "@/constants/typography";
@@ -47,6 +48,7 @@ const examAttempts = [
 ];
 
 export default function ExamPrepScreen() {
+  const [showProgressInfoModal, setShowProgressInfoModal] = React.useState(false);
   const insets = useSafeAreaInsets();
   const screenWidth = Dimensions.get("window").width;
   const maxAppWidth = 428;
@@ -88,6 +90,8 @@ export default function ExamPrepScreen() {
               style={styles.backButton}
               onPress={handleBackPress}
               activeOpacity={0.7}
+              accessibilityRole="button"
+              accessibilityLabel="Go back"
             >
               <MaterialIcon
                 name="icon-arrow-back"
@@ -128,7 +132,11 @@ export default function ExamPrepScreen() {
           <View style={styles.section}>
             <View style={styles.sectionHeader}>
               <Text style={styles.sectionTitle}>Progress Update</Text>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => setShowProgressInfoModal(true)}
+                accessibilityRole="button"
+                accessibilityLabel="About progress update"
+              >
                 <MaterialIcon name="info" size={20} color={Colors.grey[400]} />
               </TouchableOpacity>
             </View>
@@ -225,12 +233,39 @@ export default function ExamPrepScreen() {
             ))}
           </View>
         </ScrollView>
+
+        {/* Progress Update Info Modal */}
+        {showProgressInfoModal && (
+          <TouchableOpacity
+            style={styles.modalOverlay}
+            activeOpacity={1}
+            onPress={() => setShowProgressInfoModal(false)}
+          >
+            <TouchableOpacity
+              activeOpacity={1}
+              onPress={(e) => e.stopPropagation()}
+            >
+              <InformationalMessage message="Your best practice-exam attempt and how it compares to the one before it. Retake the exam anytime to push the record up." />
+            </TouchableOpacity>
+          </TouchableOpacity>
+        )}
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  modalOverlay: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "rgba(44, 44, 44, 0.18)",
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 9999,
+  },
   contentWrapper: {
     flex: 1,
     position: "relative",

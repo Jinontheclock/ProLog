@@ -36,7 +36,7 @@ export default function UploadingDocumentScreen() {
           {/* Header - Only show during loading */}
           {isLoading && (
             <View style={[styles.header, { paddingTop: insets.top + 47 }]}>
-              <TouchableOpacity style={styles.backButton} onPress={() => setShowExitModal(true)}>
+              <TouchableOpacity style={styles.backButton} onPress={() => setShowExitModal(true)} accessibilityRole="button" accessibilityLabel="Go back">
                 <MaterialIcon name="icon-arrow-back" size={24} color={Colors.grey[900]} />
               </TouchableOpacity>
             </View>
@@ -98,6 +98,8 @@ export default function UploadingDocumentScreen() {
               <TouchableOpacity 
                 style={styles.closeButton}
                 onPress={() => setShowExitModal(false)}
+                accessibilityRole="button"
+                accessibilityLabel="Close"
               >
                 <MaterialIcon name="icon-close" size={24} color={Colors.grey[900]} />
               </TouchableOpacity>

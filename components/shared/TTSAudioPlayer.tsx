@@ -180,6 +180,27 @@ export const TTSAudioPlayer: React.FC<TTSAudioPlayerProps> = ({
 
   // Handle play/pause button press
   const handlePlayPause = async () => {
+    // Portfolio demo build: no Google TTS key ships publicly, so on the web
+    // use the browser's built-in Speech Synthesis for a real spoken voice.
+    const synth =
+      typeof window !== 'undefined' ? (window as any).speechSynthesis : undefined;
+    if (synth) {
+      if (isPlaying) {
+        synth.cancel();
+        setIsPlaying(false);
+      } else {
+        synth.cancel();
+        const utter = new (window as any).SpeechSynthesisUtterance(text);
+        utter.lang = languageCode;
+        utter.rate = speakingRate || 1;
+        utter.onend = () => setIsPlaying(false);
+        utter.onerror = () => setIsPlaying(false);
+        synth.speak(utter);
+        setIsPlaying(true);
+      }
+      return;
+    }
+
     try {
       if (isLoading) return;
 

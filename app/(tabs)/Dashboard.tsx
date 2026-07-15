@@ -4,6 +4,7 @@ import { Reminder } from "@/components/shared/Reminder";
 import SendDiscrepancyReportModal from "@/components/shared/SendDiscrepancyReportModal";
 import { SProgressBar } from "@/components/shared/SProgressBar";
 import { Tags } from "@/components/shared/Tags";
+import { UpdatePulse } from "@/components/shared/UpdatePulse";
 import { Colors } from "@/constants/colors";
 import { Spacing } from "@/constants/design-tokens";
 import { Typography } from "@/constants/typography";
@@ -132,30 +133,35 @@ export default function DashboardScreen() {
               You're getting closer to the goal everyday!
             </Text>
           </View>
-          <TouchableOpacity
-            style={styles.profileButton}
-            onPress={toggleDemoState}
-            disabled={isLoading}
-          >
-            <Animated.View
-              style={{
-                transform: [
-                  {
-                    rotate: spinAnimation.interpolate({
-                      inputRange: [0, 1],
-                      outputRange: ["0deg", "360deg"],
-                    }),
-                  },
-                ],
-              }}
+          <View style={styles.updateButtonWrap}>
+            <UpdatePulse size={40} />
+            <TouchableOpacity
+              style={styles.profileButton}
+              onPress={toggleDemoState}
+              disabled={isLoading}
+              accessibilityRole="button"
+              accessibilityLabel="Sync progress data"
             >
-              <MaterialCommunityIcons
-                name="cached"
-                size={24}
-                color={isLoading ? Colors.grey[400] : Colors.grey[700]}
-              />
-            </Animated.View>
-          </TouchableOpacity>
+              <Animated.View
+                style={{
+                  transform: [
+                    {
+                      rotate: spinAnimation.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: ["0deg", "360deg"],
+                      }),
+                    },
+                  ],
+                }}
+              >
+                <MaterialCommunityIcons
+                  name="cached"
+                  size={24}
+                  color={isLoading ? Colors.grey[400] : Colors.grey[700]}
+                />
+              </Animated.View>
+            </TouchableOpacity>
+          </View>
         </View>
 
         {/* Progress Bar */}
@@ -375,6 +381,11 @@ const styles = StyleSheet.create({
     color: Colors.grey[500],
     marginTop: 4,
   },
+  updateButtonWrap: {
+    width: 40,
+    height: 40,
+    position: "relative",
+  },
   profileButton: {
     width: 40,
     height: 40,
@@ -396,7 +407,7 @@ const styles = StyleSheet.create({
     gap: Spacing.md,
   },
   progressBar: {
-    width: 317,
+    flex: 1,
     height: 8,
     backgroundColor: Colors.grey[100],
     borderRadius: 40,
@@ -432,6 +443,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     lineHeight: 20 * 1.05,
     color: Colors.grey[700],
+    // titles elsewhere sit 4px inside the 20px gutter
+    marginLeft: 4,
   },
   sectionContainer: {
     display: "flex",
@@ -442,7 +455,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     borderRadius: 20,
     padding: Spacing.lg,
-    marginHorizontal: Spacing.lg,
     marginBottom: Spacing.lg,
     shadowColor: Colors.grey[900],
     shadowOffset: { width: 0, height: 2 },
@@ -452,9 +464,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    width: 386,
+    alignSelf: "stretch",
     height: 127,
-    alignSelf: "center",
   },
   examLeft: {
     flex: 1,
@@ -507,7 +518,7 @@ const styles = StyleSheet.create({
     zIndex: 10000,
   },
   skeletonText: {
-    backgroundColor: "#E5E7EB",
+    backgroundColor: Colors.grey[100],
     borderRadius: 4,
     opacity: 0.6,
   },
