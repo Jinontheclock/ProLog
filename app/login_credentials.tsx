@@ -29,10 +29,11 @@ export default function LoginCredentialsScreen() {
     router.back();
   };
 
-  const handleEmailFocus = () => {
-    setEmail("ujung@my.bcit.ca");
-    setPassword("**************");
-    setReEnterPassword("**************");
+  // the email follows the name: "Hajin Lee" -> hajinlee@prolog.ca
+  const handleNameChange = (value: string) => {
+    setName(value);
+    const handle = value.trim().toLowerCase().replace(/[^a-z0-9]/g, "");
+    setEmail(handle ? `${handle}@prolog.ca` : "");
   };
 
   const handlePasswordFocus = () => {
@@ -43,11 +44,8 @@ export default function LoginCredentialsScreen() {
     setReEnterPassword("**************");
   };
 
-  const isFormComplete =
-    name.trim() !== "" &&
-    email.trim() !== "" &&
-    password.trim() !== "" &&
-    reEnterPassword.trim() !== "";
+  // demo gate: only the name matters — passwords can be anything (or empty)
+  const isFormComplete = name.trim() !== "";
 
   const handleCreateAccount = () => {
     setUserName(name);
@@ -96,7 +94,7 @@ export default function LoginCredentialsScreen() {
                   placeholder="Enter your name"
                   placeholderTextColor={Colors.grey[300]}
                   value={name}
-                  onChangeText={setName}
+                  onChangeText={handleNameChange}
                 />
               </View>
               <View style={styles.inputSection}>
@@ -107,7 +105,6 @@ export default function LoginCredentialsScreen() {
                   placeholderTextColor={Colors.grey[300]}
                   value={email}
                   onChangeText={setEmail}
-                  onFocus={handleEmailFocus}
                 />
               </View>
               <View style={styles.inputSection}>
