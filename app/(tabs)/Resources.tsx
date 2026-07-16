@@ -1,9 +1,9 @@
 import { CommonStyles } from '@/lib/common-styles';
 import { useExternalLink } from '@/lib/external-link';
-import { displayName } from '@/lib/user-store';
+import { displayName, setUserName, subscribe } from '@/lib/user-store';
 import { router } from 'expo-router';
 import React from 'react';
-import { Image, ScrollView, StyleSheet, Switch, Text, TouchableOpacity, View } from 'react-native';
+import { Image, Modal, ScrollView, StyleSheet, Switch, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Button } from '@/components/shared/Buttons';
@@ -48,12 +48,14 @@ function SettingRow({
       ) : (
         <View style={styles.rowRight}>
           {value ? <Text style={styles.rowValue}>{value}</Text> : null}
-          <MaterialIcon name="chevron_right" size={20} color={Colors.grey[300]} />
+          {onPress ? (
+            <MaterialIcon name="chevron_right" size={20} color={Colors.grey[300]} />
+          ) : null}
         </View>
       )}
     </View>
   );
-  if (switchValue !== undefined) return content;
+  if (switchValue !== undefined || !onPress) return content;
   return (
     <TouchableOpacity activeOpacity={0.6} onPress={onPress}>
       {content}
@@ -65,7 +67,20 @@ export default function SettingsScreen() {
   const insets = useSafeAreaInsets();
   const openExternal = useExternalLink();
 
-  // demo state: the switches work locally; navigation rows are inert
+  const userName = React.useSyncExternalStore(subscribe, displayName);
+  const [editingName, setEditingName] = React.useState(false);
+  const [nameDraft, setNameDraft] = React.useState('');
+
+  const openNameEditor = () => {
+    setNameDraft(displayName());
+    setEditingName(true);
+  };
+  const saveName = () => {
+    if (nameDraft.trim()) setUserName(nameDraft);
+    setEditingName(false);
+  };
+
+  // demo state: the switches work locally; the value-only rows are static
   const [notifications, setNotifications] = React.useState(true);
   const [reminders, setReminders] = React.useState(true);
   const [tts, setTts] = React.useState(true);
@@ -92,12 +107,18 @@ export default function SettingsScreen() {
 
         <View style={styles.content}>
           {/* Profile */}
-          <TouchableOpacity style={styles.profileCard} activeOpacity={0.6}>
+          <TouchableOpacity
+            style={styles.profileCard}
+            activeOpacity={0.6}
+            onPress={openNameEditor}
+            accessibilityRole="button"
+            accessibilityLabel="Edit name"
+          >
             <View style={styles.avatar}>
               <MaterialIcon name="person" size={26} color={Colors.orange[400]} />
             </View>
             <View style={styles.profileText}>
-              <Text style={styles.profileName}>{displayName()}</Text>
+              <Text style={styles.profileName}>{userName}</Text>
               <Text style={styles.profileSub}>Electrical Apprentice · Level 2</Text>
             </View>
             <MaterialIcon name="edit" size={18} color={Colors.grey[300]} />
@@ -180,11 +201,73 @@ export default function SettingsScreen() {
           <Text style={styles.version}>ProLog · Version 1.0.0</Text>
         </View>
       </ScrollView>
+
+      {/* Edit-name dialog: the greeting and profile follow the new name */}
+      <Modal visible={editingName} transparent animationType="fade" onRequestClose={() => setEditingName(false)}>
+        <View style={styles.editOverlay}>
+          <View style={styles.editCard}>
+            <Text style={styles.editTitle}>Edit name</Text>
+            <TextInput
+              style={styles.editInput}
+              value={nameDraft}
+              onChangeText={setNameDraft}
+              placeholder="Enter your name"
+              placeholderTextColor={Colors.grey[300]}
+              autoFocus
+            />
+            <View style={styles.editActions}>
+              <Button text="Cancel" variant="light" onPress={() => setEditingName(false)} />
+              <Button
+                text="Save"
+                variant={nameDraft.trim() ? 'primary' : 'light'}
+                onPress={nameDraft.trim() ? saveName : undefined}
+                disabled={!nameDraft.trim()}
+              />
+            </View>
+          </View>
+        </View>
+      </Modal>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  editOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(15, 15, 15, 0.45)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 32,
+  },
+  editCard: {
+    width: '100%',
+    maxWidth: 340,
+    backgroundColor: Colors.white,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: Colors.grey[100],
+    padding: 20,
+    gap: 16,
+  },
+  editTitle: {
+    ...Typography.contentTitle,
+    color: Colors.grey[900],
+  },
+  editInput: {
+    backgroundColor: Colors.grey[50],
+    borderRadius: 8,
+    paddingHorizontal: 16,
+    height: 44,
+    ...Typography.bigBody,
+    color: Colors.grey[900],
+    borderWidth: 1,
+    borderColor: '#E5E5E5',
+  },
+  editActions: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    gap: 10,
+  },
   content: {
     paddingHorizontal: 24,
     paddingTop: 8,

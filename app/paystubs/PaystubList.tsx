@@ -19,56 +19,56 @@ export default function PaystubListScreen() {
   const [showYearDropdown, setShowYearDropdown] = useState(false);
 
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  const years = ['2024', '2025'];
+  const years = ['2025', '2026'];
 
   // Monthly stubs at a Level 2 apprentice rate (~$26/hr), with hours a
   // real month can actually hold
   const allPaystubs = [
     {
       month: 'May',
-      year: '2025',
+      year: '2026',
       company: 'Burquos Mills Inc.',
-      receivedDate: 'Jun 06, 2025',
+      receivedDate: 'Jun 06, 2026',
       workHours: 152,
       income: '$3,952',
     },
     {
       month: 'April',
-      year: '2025',
+      year: '2026',
       company: 'Burquos Mills Inc.',
-      receivedDate: 'May 08, 2025',
+      receivedDate: 'May 08, 2026',
       workHours: 168,
       income: '$4,368',
     },
     {
       month: 'March',
-      year: '2025',
+      year: '2026',
       company: 'Burquos Mills Inc.',
-      receivedDate: 'Apr 04, 2025',
+      receivedDate: 'Apr 04, 2026',
       workHours: 144,
       income: '$3,744',
     },
     {
       month: 'February',
-      year: '2025',
+      year: '2026',
       company: 'Burquos Mills Inc.',
-      receivedDate: 'Mar 07, 2025',
+      receivedDate: 'Mar 07, 2026',
       workHours: 160,
       income: '$4,160',
     },
     {
       month: 'January',
-      year: '2025',
+      year: '2026',
       company: 'Burquos Mills Inc.',
-      receivedDate: 'Feb 06, 2025',
+      receivedDate: 'Feb 06, 2026',
       workHours: 136,
       income: '$3,536',
     },
     {
       month: 'December',
-      year: '2024',
+      year: '2025',
       company: 'Burquos Mills Inc.',
-      receivedDate: 'Jan 09, 2025',
+      receivedDate: 'Jan 09, 2026',
       workHours: 120,
       income: '$3,120',
     },

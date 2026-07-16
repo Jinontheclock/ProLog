@@ -26,7 +26,7 @@ export const SmallDataCard: React.FC<SmallDataCardProps> = ({
       <View style={styles.valueRow}>
         <Text style={styles.value}>26/40</Text>
       </View>
-      <Text style={styles.lastUpdated}>Aug 7, 2025</Text>
+      <Text style={styles.lastUpdated}>Aug 7, 2026</Text>
     </View>
   );
 };

@@ -32,16 +32,16 @@ const MONTH_MAP: { [key: string]: number } = {
   Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11,
 };
 
-// The demo lives on Dec 5, 2025 — the highlighted "today"
-const DEMO_TODAY = { day: 5, monthIndex: 11, year: 2025 };
+// The demo lives on Dec 5, 2026 — the highlighted "today"
+const DEMO_TODAY = { day: 5, monthIndex: 11, year: 2026 };
 
 export const ReminderFullView: React.FC<ReminderFullViewProps> = ({
   reminders = [
-    { title: 'BCIT Tuition Deadline', date: 'Dec 07, 2025', day: 'Sunday' },
-    { title: 'Apply For EI', date: 'Dec 31, 2025', day: 'Wednesday' },
+    { title: 'BCIT Tuition Deadline', date: 'Dec 07, 2026', day: 'Monday' },
+    { title: 'Apply For EI', date: 'Dec 31, 2026', day: 'Thursday' },
   ],
   monthIndex = 11,
-  year = 2025,
+  year = 2026,
   onPrevMonth,
   onNextMonth,
   onAddReminder,

@@ -7,7 +7,7 @@ import { CommonStyles } from "@/lib/common-styles";
 import { completionStore } from "@/lib/completion-store";
 import { router, useLocalSearchParams } from "expo-router";
 import React, { useEffect, useRef, useState } from "react";
-import { Alert, Animated, Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Animated, Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import {
   SafeAreaView,
   useSafeAreaInsets,
@@ -15,6 +15,7 @@ import {
 
 // Import the competency data
 import { TTSAudioPlayer } from "@/components/shared/TTSAudioPlayer";
+import { showAlert } from "@/lib/web-alert";
 import SuccessMessage from "@/components/shared/successMessage";
 import skillsData from "@/data/skills-competency-summary.json";
 
@@ -77,7 +78,7 @@ export default function SkillsDetailsScreen() {
           await loadCompletionStatus(competencyId);
           setIsLoading(false);
         } else {
-          Alert.alert("Error", "Competency not found", [
+          showAlert("Error", "Competency not found", [
             { text: "OK", onPress: () => router.back() },
           ]);
           setIsLoading(false);
@@ -134,7 +135,7 @@ export default function SkillsDetailsScreen() {
       console.error("Error saving completion status:", error);
       // Revert the local state if save failed
       setIsCompleted(!newCompletedState);
-      Alert.alert(
+      showAlert(
         "Error",
         "Failed to save completion status. Please try again.",
         [{ text: "OK" }]

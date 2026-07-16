@@ -28,8 +28,8 @@ export const Reminder: React.FC<ReminderProps> = ({
   refreshTrigger,
 }) => {
   const DEFAULT_REMINDERS: ReminderItem[] = [
-    { title: 'BCIT Tuition Deadline', date: 'Dec 07, 2025', day: 'Sunday' },
-    { title: 'Apply for EI', date: 'Dec 31, 2025', day: 'Wednesday' },
+    { title: 'BCIT Tuition Deadline', date: 'Dec 07, 2026', day: 'Monday' },
+    { title: 'Apply for EI', date: 'Dec 31, 2026', day: 'Thursday' },
   ];
   const [localReminders, setLocalReminders] = useState<ReminderItem[]>(reminders ?? DEFAULT_REMINDERS);
 

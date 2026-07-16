@@ -172,7 +172,7 @@
         },
         "examAttemptDate": {
           "before": "",
-          "after": "May 09, 2025",
+          "after": "May 09, 2027",
           "nxtLvl": ""
         },
         "registeredBadge": {
@@ -207,10 +207,10 @@
           "before": "203 days",
           "after": "20 days"
         },
-        "startDate": "May 06, 2024",
+        "startDate": "May 06, 2026",
         "estimatedEndDate": {
-          "before": "Mar 19, 2025",
-          "after": "Apr 15, 2025"
+          "before": "Mar 19, 2027",
+          "after": "Apr 15, 2027"
         }
       },
       "discrepancyTracking": {
@@ -219,16 +219,16 @@
           "after": "1800"
         },
         "paystubDate": {
-          "before": "Jul 02, 2024",
-          "after": "Apr 02, 2025"
+          "before": "Jul 02, 2026",
+          "after": "Apr 02, 2027"
         },
         "skilledTradeBCHours": {
           "before": "450",
           "after": "1640"
         },
         "skilledTradeBCDate": {
-          "before": "Jul 12, 2024",
-          "after": "Apr 25, 2025"
+          "before": "Jul 12, 2026",
+          "after": "Apr 25, 2027"
         },
         "discrepancy": {
           "before": "0",
@@ -253,12 +253,12 @@
           "after": "income_graph02.png"
         },
         "paystubDateStart": {
-          "before": "Jan 2024",
-          "after": "Oct 2024"
+          "before": "Jan 2026",
+          "after": "Oct 2026"
         },
         "paystubDateEnd": {
-          "before": "Jun 2024",
-          "after": "Mar 2025"
+          "before": "Jun 2026",
+          "after": "Mar 2027"
         }
       }
     },
@@ -280,7 +280,7 @@
         "examAttempt": "Attempt 1",
         "examAttemptDate": {
           "before": "",
-          "after": "May 09, 2025"
+          "after": "May 09, 2027"
         },
         "registeredBadge": {
           "before": "Not Registered",

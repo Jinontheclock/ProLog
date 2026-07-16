@@ -23,7 +23,7 @@ export const AddReminderDialogueBox: React.FC<AddReminderDialogueBoxProps> = ({
   
   // Demo content for auto-fill
   const demoEventName = 'Test Next Week';
-  const demoDate = 'Dec 05, 2025';
+  const demoDate = 'Dec 05, 2026';
   
   const handleEventNameFocus = () => {
     // Auto-fill with demo content when focused

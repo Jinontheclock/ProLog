@@ -1,7 +1,7 @@
 import { AudioPlayer } from '@/components/shared/AudioPlayer';
 import { Audio } from 'expo-av';
+import { showAlert } from '@/lib/web-alert';
 import React, { useEffect, useRef, useState } from 'react';
-import { Alert } from 'react-native';
 
 interface TTSAudioPlayerProps {
   text: string;
@@ -111,8 +111,7 @@ export const TTSAudioPlayer: React.FC<TTSAudioPlayerProps> = ({
 
   // Synthesize speech from Google TTS API
   const synthesizeSpeech = async (): Promise<string> => {
-    console.log('Synthesizing speech...');
-    
+
     const requestBody = {
       input: { text },
       voice: {
@@ -146,14 +145,12 @@ export const TTSAudioPlayer: React.FC<TTSAudioPlayerProps> = ({
       throw new Error('No audio content received');
     }
 
-    console.log('Speech synthesis successful');
     return data.audioContent;
   };
 
   // Create and load audio from base64 content
   const createAudioFromContent = async (audioContent: string): Promise<Audio.Sound> => {
-    console.log('Creating audio from content...');
-    
+
     // Stop and unload any existing sound
     if (soundRef.current) {
       await soundRef.current.stopAsync();
@@ -174,7 +171,6 @@ export const TTSAudioPlayer: React.FC<TTSAudioPlayerProps> = ({
       throw new Error('Failed to load audio file');
     }
 
-    console.log('Audio created and loaded successfully');
     return sound;
   };
 
@@ -206,7 +202,7 @@ export const TTSAudioPlayer: React.FC<TTSAudioPlayerProps> = ({
 
       // If no audio content, synthesize first
       if (!audioContent) {
-        console.log('No audio content, synthesizing...');
+
         setIsLoading(true);
         
         const newAudioContent = await synthesizeSpeech();
@@ -220,14 +216,13 @@ export const TTSAudioPlayer: React.FC<TTSAudioPlayerProps> = ({
         setIsPlaying(true);
         startProgressTracking();
         setIsLoading(false);
-        
-        console.log('Started playing new audio');
+
         return;
       }
 
       // If we have audio content but no sound object, create it
       if (!soundRef.current && audioContent) {
-        console.log('Recreating sound object...');
+
         const sound = await createAudioFromContent(audioContent);
         soundRef.current = sound;
       }
@@ -239,13 +234,13 @@ export const TTSAudioPlayer: React.FC<TTSAudioPlayerProps> = ({
         if (status.isLoaded) {
           if (isPlaying) {
             // Pause
-            console.log('Pausing audio');
+
             await soundRef.current.pauseAsync();
             setIsPlaying(false);
             stopProgressTracking();
           } else {
             // Play/Resume
-            console.log('Playing/Resuming audio');
+
             await soundRef.current.playAsync();
             setIsPlaying(true);
             startProgressTracking();
@@ -257,7 +252,7 @@ export const TTSAudioPlayer: React.FC<TTSAudioPlayerProps> = ({
       setIsLoading(false);
       setIsPlaying(false);
       stopProgressTracking();
-      Alert.alert('Playback Error', error instanceof Error ? error.message : 'Failed to play audio');
+      showAlert('Playback Error', error instanceof Error ? error.message : 'Failed to play audio');
     }
   };
 
@@ -270,7 +265,7 @@ export const TTSAudioPlayer: React.FC<TTSAudioPlayerProps> = ({
           const newMutedState = !isMuted;
           await soundRef.current.setVolumeAsync(newMutedState ? 0 : 1);
           setIsMuted(newMutedState);
-          console.log(newMutedState ? 'Audio muted' : 'Audio unmuted');
+
         }
       }
     } catch (error) {
@@ -284,7 +279,7 @@ export const TTSAudioPlayer: React.FC<TTSAudioPlayerProps> = ({
       if (soundRef.current) {
         const status = await soundRef.current.getStatusAsync();
         if (status.isLoaded) {
-          console.log('Restarting audio from beginning');
+
           await soundRef.current.setPositionAsync(0);
           setProgress(0);
           setCurrentTime('0:00');

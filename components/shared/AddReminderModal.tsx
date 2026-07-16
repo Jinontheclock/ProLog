@@ -67,7 +67,7 @@ export const AddReminderModal: React.FC<AddReminderModalProps> = ({
               <Text style={styles.label}>Date</Text>
               <TextInput
                 style={styles.input}
-                placeholder="Dec 2, 2025"
+                placeholder="Dec 2, 2026"
                 placeholderTextColor={Colors.grey[400]}
                 value={date}
                 onChangeText={setDate}

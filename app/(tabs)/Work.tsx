@@ -106,7 +106,6 @@ export default function WorkScreen() {
         }, 3000);
       }, 350);
     } catch (error) {
-      console.log('Error playing notification sound:', error);
       // Still show popup even if sound fails (with same delay)
       setTimeout(() => {
         setShowNotificationPopup(true);
@@ -431,7 +430,7 @@ export default function WorkScreen() {
               checkboxLabel="Practical Competencies"
               current={10}
               total={34}
-              lastUpdated="On: Mar 12, 2025"
+              lastUpdated="On: Jun 12, 2026"
               progressImage={require("@/assets/images/Group 46.png")}
             />
 
@@ -674,7 +673,7 @@ export default function WorkScreen() {
             typeName="Notification Reminder"
             date="now"
             title="BCIT Tuition Deadline"
-            content="Dec 07, 2025"
+            content="Dec 07, 2026"
           />
         </Animated.View>
       )}

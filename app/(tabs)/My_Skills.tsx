@@ -181,15 +181,6 @@ export default function SkillsScreen() {
         {/* Content based on selected tab */}
         {selectedTab === "overall" && (
           <View style={styles.overallContainer}>
-            {/* Recents Component */}
-            {/* <View style={styles.componentContainer}>
-              <Recents
-                title="Recently viewed"
-                line="Line A-3"
-                description="Describe the concepts of electricity..."
-                onRemove={() => console.log("Remove recent item")}
-              />
-            </View> */}
 
             {/* Exam Prep Component */}
             <View style={styles.examPrepSection}>

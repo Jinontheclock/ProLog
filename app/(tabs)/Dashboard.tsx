@@ -5,7 +5,7 @@ import SendDiscrepancyReportModal from "@/components/shared/SendDiscrepancyRepor
 import { SProgressBar } from "@/components/shared/SProgressBar";
 import { Tags } from "@/components/shared/Tags";
 import { UpdatePulse } from "@/components/shared/UpdatePulse";
-import { displayName } from "@/lib/user-store";
+import { displayName, subscribe } from "@/lib/user-store";
 import { Colors } from "@/constants/colors";
 import { Spacing } from "@/constants/design-tokens";
 import { Typography } from "@/constants/typography";
@@ -13,7 +13,7 @@ import workData from "@/data/work-data.json";
 import { CommonStyles } from "@/lib/common-styles";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { router } from "expo-router";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useSyncExternalStore } from "react";
 import {
   Animated,
   Image,
@@ -26,6 +26,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function DashboardScreen() {
+  const userName = useSyncExternalStore(subscribe, displayName);
   const [demoState, setDemoState] = useState<"before" | "after" | "nxtLvl">("before");
   const [isLoading, setIsLoading] = useState(false);
   const [level3AnimationActive, setLevel3AnimationActive] = useState(false);
@@ -129,7 +130,7 @@ export default function DashboardScreen() {
         {/* Header */}
         <View style={styles.header}>
           <View>
-            <Text style={styles.greeting}>Hello {displayName()}</Text>
+            <Text style={styles.greeting}>Hello {userName}</Text>
             <Text style={styles.subtitle}>
               You're getting closer to the goal everyday!
             </Text>

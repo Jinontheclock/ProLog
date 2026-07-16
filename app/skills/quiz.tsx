@@ -10,12 +10,12 @@ import { Colors } from "@/constants/colors";
 import { Spacing } from "@/constants/design-tokens";
 import { Typography } from "@/constants/typography";
 import { CommonStyles } from "@/lib/common-styles";
+import { showAlert } from "@/lib/web-alert";
 import { completionStore } from "@/lib/completion-store";
 import { generateQuiz, QuizQuestion } from "@/lib/quizApi";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
 import {
-  Alert,
   Image,
   ScrollView,
   StyleSheet,
@@ -96,7 +96,7 @@ const QuizPage: React.FC = () => {
         setError(err instanceof Error ? err.message : "Failed to load quiz");
 
         // Show error alert and go back
-        Alert.alert(
+        showAlert(
           "Quiz Error",
           "Failed to generate quiz questions. Please try again later.",
           [{ text: "OK", onPress: () => router.back() }]

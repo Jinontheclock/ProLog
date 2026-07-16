@@ -34,7 +34,7 @@ const SKILLS_RECORD = {
     theory: {
         completed: { before: 14, after: 22 },
         total: 36,
-        lastUpdated: { before: "Dec 05, 2025", after: "Dec 12, 2025" },
+        lastUpdated: { before: "Dec 05, 2026", after: "Dec 12, 2026" },
     },
     lines: [
         { name: "Line A", total: 16, before: 7, after: 11 },

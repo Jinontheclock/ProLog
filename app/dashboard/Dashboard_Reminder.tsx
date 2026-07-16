@@ -20,8 +20,8 @@ interface ReminderItem {
 }
 
 const DEFAULT_REMINDERS: ReminderItem[] = [
-  { title: 'BCIT Tuition Deadline', date: 'Dec 07, 2025', day: 'Sunday' },
-  { title: 'Apply for EI', date: 'Dec 31, 2025', day: 'Wednesday' },
+  { title: 'BCIT Tuition Deadline', date: 'Dec 07, 2026', day: 'Monday' },
+  { title: 'Apply for EI', date: 'Dec 31, 2026', day: 'Thursday' },
 ];
 
 export default function DashboardReminderScreen() {
@@ -29,9 +29,9 @@ export default function DashboardReminderScreen() {
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
   const [pendingDeleteIndex, setPendingDeleteIndex] = useState<number | null>(null);
   const [reminderList, setReminderList] = useState<ReminderItem[]>(DEFAULT_REMINDERS);
-  // Calendar view defaults to the demo month (December 2025) but can page
+  // Calendar view defaults to the demo month (December 2026) but can page
   // freely in both directions
-  const [viewMonth, setViewMonth] = useState({ monthIndex: 11, year: 2025 });
+  const [viewMonth, setViewMonth] = useState({ monthIndex: 11, year: 2026 });
 
   const stepMonth = (delta: number) => {
     setViewMonth(({ monthIndex, year }) => {
