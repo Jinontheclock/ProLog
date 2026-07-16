@@ -1,5 +1,6 @@
 import { CommonStyles } from '@/lib/common-styles';
 import { useExternalLink } from '@/lib/external-link';
+import { displayName } from '@/lib/user-store';
 import { router } from 'expo-router';
 import React from 'react';
 import { Image, ScrollView, StyleSheet, Switch, Text, TouchableOpacity, View } from 'react-native';
@@ -96,7 +97,7 @@ export default function SettingsScreen() {
               <MaterialIcon name="person" size={26} color={Colors.orange[400]} />
             </View>
             <View style={styles.profileText}>
-              <Text style={styles.profileName}>Ubin Park</Text>
+              <Text style={styles.profileName}>{displayName()}</Text>
               <Text style={styles.profileSub}>Electrical Apprentice · Level 2</Text>
             </View>
             <MaterialIcon name="edit" size={18} color={Colors.grey[300]} />

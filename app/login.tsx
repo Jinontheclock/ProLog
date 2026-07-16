@@ -47,12 +47,6 @@ export default function LoginScreen() {
               fullWidth={true}
               onPress={() => router.push("/login_credentials")}
             />
-            <Button
-              text="Login"
-              variant="dark"
-              fullWidth={true}
-              onPress={() => router.push("/(tabs)/Dashboard")}
-            />
           </View>
         </View>
     </SafeAreaView>

@@ -16,8 +16,10 @@ import MaterialIcon from "@/components/shared/MaterialIcon";
 import { Typography } from "@/constants";
 import { Colors } from "@/constants/colors";
 import { CommonStyles } from "@/lib/common-styles";
+import { setUserName } from "@/lib/user-store";
 
 export default function LoginCredentialsScreen() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [reEnterPassword, setReEnterPassword] = useState("");
@@ -42,11 +44,13 @@ export default function LoginCredentialsScreen() {
   };
 
   const isFormComplete =
+    name.trim() !== "" &&
     email.trim() !== "" &&
     password.trim() !== "" &&
     reEnterPassword.trim() !== "";
 
   const handleCreateAccount = () => {
+    setUserName(name);
     setIsLoading(true);
     // Simulate loading time
     setTimeout(() => {
@@ -85,6 +89,16 @@ export default function LoginCredentialsScreen() {
                 ProLog connects directly with SkilledTradesBC. Log in with your
                 SkilledTradesBC account to get started.
               </Text>
+              <View style={styles.inputSection}>
+                <Text style={styles.label}>Name</Text>
+                <TextInput
+                  style={styles.input}
+                  placeholder="Enter your name"
+                  placeholderTextColor={Colors.grey[300]}
+                  value={name}
+                  onChangeText={setName}
+                />
+              </View>
               <View style={styles.inputSection}>
                 <Text style={styles.label}>Email</Text>
                 <TextInput
@@ -223,10 +237,10 @@ const styles = StyleSheet.create({
   },
   image: {
     top: 0,
-    marginTop: -22,
-    marginBottom: 32,
-    width: 280,
-    height: 220,
+    marginTop: -12,
+    marginBottom: 12,
+    width: 200,
+    height: 140,
     resizeMode: "contain",
   },
 });

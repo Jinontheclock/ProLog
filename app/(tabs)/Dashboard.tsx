@@ -5,6 +5,7 @@ import SendDiscrepancyReportModal from "@/components/shared/SendDiscrepancyRepor
 import { SProgressBar } from "@/components/shared/SProgressBar";
 import { Tags } from "@/components/shared/Tags";
 import { UpdatePulse } from "@/components/shared/UpdatePulse";
+import { displayName } from "@/lib/user-store";
 import { Colors } from "@/constants/colors";
 import { Spacing } from "@/constants/design-tokens";
 import { Typography } from "@/constants/typography";
@@ -128,7 +129,7 @@ export default function DashboardScreen() {
         {/* Header */}
         <View style={styles.header}>
           <View>
-            <Text style={styles.greeting}>Hello Ubin</Text>
+            <Text style={styles.greeting}>Hello {displayName()}</Text>
             <Text style={styles.subtitle}>
               You're getting closer to the goal everyday!
             </Text>
